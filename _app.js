@@ -4,9 +4,6 @@ const fs = require('fs');
 const publicPath = "public/HTML/";
 //#endregion
 
-
-
-
 /**
  *  * 2024_06_21 배성빈 : server 
  *  기본적인 request에 맞는 response를 반환할 수 있도록 연결장치, 중간다리 역할을 수행한다. 
@@ -64,6 +61,17 @@ const postMethodHandler = (req, res) => {
 }
 
 
+/**
+ * ? postLoginProcessor : req객체에 포함되어있는 id,pw값을 추출하여 db에서 확인하는 모듈
+ * @param {*} req : 요청객체
+ * @param {*} res : 응답객체
+ * 
+ * ! 현재 진행한 작업 
+ * id, pw값 추출 
+ * 
+ * ! 진행해야하는 작업
+ * Database 모듈 접근, response 반환
+ */
 
 const postLoginProcessor = (req, res) => {
   let body = "";
@@ -81,8 +89,6 @@ const postLoginProcessor = (req, res) => {
     console.log(decodeURI(id));
     console.log(decodeURI(pw));
   })
-
-
 
 };
 
@@ -110,6 +116,18 @@ const sendFile = (fileName, contentType, res) => {
 };
 
 
+
+/**
+ * ? getContentType : 을 통해 Content-Type 값을 지정해준다.
+ * @param {*} url : req.url
+ * @returns : content type
+ * 
+ * ! 현재 진행한 작업
+ * "/" 분기, html 지정
+ * 
+ * ! 진행해야하는 작업
+ * 다른 분기 설정
+ */
 const getContentType = (url) => {
   if (url === "/") {
     return "text/html";
