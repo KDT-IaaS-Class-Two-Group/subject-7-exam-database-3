@@ -48,89 +48,270 @@ main {
   width: 23%;
   height: 58%;
 }
-
-.pricetag {
-  background-color: aqua;
-}
-
-.animal_price,
-.time_price,
-.crime_price,
-.space_price,
-.radiation_price {
-  font-size: 9px;
-  position: fixed;
-  width: 300px;
-  height: 20px;
-  display: flex;
-  cursor: pointer;
-  padding-left: 9px;
-}
-
-.animal_price {
-  top: 33%;
-  left: 51.6%;
-  transform: translate(-50%, -50%);
-}
-
-.time_price {
-  top: 40.3%;
-  left: 51.6%;
-  transform: translate(-50%, -50%);
-}
-
-.crime_price {
-  top: 47.6%;
-  left: 51.6%;
-  transform: translate(-50%, -50%);
-}
-
-.space_price {
-  top: 55%;
-  left: 51.6%;
-  transform: translate(-50%, -50%);
-}
-
-.radiation_price {
-  top: 62.4%;
-  left: 51.6%;
-  transform: translate(-50%, -50%);
-}
-
-.animal_price div,
-.time_price div,
-.crime_price div,
-.space_price div,
-.radiation_price div {
+.can {
+  width: 80px;
+  height: 40px;
   background-color: #fff;
-  border-radius: 20px;
-  border: 1px solid #000;
-  padding: 3px;
-  margin-left: 8px;
-
+  margin-left: 10px;
+  border-radius: 10px;
 }
-
-.animal_price div:hover {
+.box1 {
+  position: absolute;
+  top: 245px;
+  left: 43.5%;
+  width: 201px;
+  height: 50px;
+}
+.animalnoncan {
+  margin-top: 6px;
+  margin-right: 6px;
+  display: flex;
+}
+.animalnoncan1:hover {
+background-color: #F2A0AF;
+}
+.animalnoncan2:hover {
   background-color: #F2A0AF;
+  }
+  .animalnoncan3hover {
+    background-color: #F2A0AF;
+    }
+    .animalnoncan4:hover {
+      background-color: #F2A0AF;
+      }
+      .animalnoncan5:hover {
+        background-color: #F2A0AF;
+        }
+.box2 {
+  position: absolute;
+  top: 315px;
+  left: 43.5%;
+  width: 201px;
+  height: 50px;
 }
-
-.time_price div:hover {
+.timenoncan {
+  margin-top: 6px;
+  margin-right: 6px;
+  display: flex;
+}
+.timenoncan1:hover {
   background-color: #733A26;
-  color: #fff;
-}
+  }
+  .timenoncan2:hover {
+    background-color: #733A26;
+    }
+    .timenoncan3:hover {
+      background-color: #733A26;
+      }
+      .timenoncan4:hover {
+        background-color: #733A26;
+        }
+        .timenoncan5:hover {
+          background-color: #733A26;
+          }
 
-.crime_price div:hover {
+.box3 {
+  position: absolute;
+  top: 385px;
+  left: 43.5%;
+  width: 201px;
+  height: 50px;
+}
+.crimenoncan {
+  margin-top: 6px;
+  margin-right: 6px;
+  display: flex;
+}
+.crimenoncan1:hover {
   background-color: #E01212;
-  color: #fff;
+}
+.crimenoncan2:hover {
+  background-color: #E01212;
+}
+.crimenoncan3:hover {
+  background-color: #E01212;
+}
+.crimenoncan4:hover {
+  background-color: #E01212;
+}
+.crimenoncan5:hover {
+  background-color: #E01212;
 }
 
-.space_price div:hover {
+.box4 {
+  position: absolute;
+  top: 453px;
+  left: 43.5%;
+  width: 201px;
+  height: 50px;
+}
+.spacenoncan {
+  margin-top: 6px;
+  margin-right: 6px;
+  display: flex;
+}
+.spacenoncan1:hover {
   background-color: #4333A6;
-  color: #fff;
+}
+.spacenoncan2:hover {
+  background-color: #4333A6;
+}
+.spcaenoncan3:hover {
+  background-color: #4333A6;
+}
+.spacenoncan4:hover {
+  background-color: #4333A6;
+}
+.spacenoncan5:hover {
+  background-color: #4333A6;
+}
+.box5 {
+  position: absolute;
+  top: 523px;
+  left: 43.5%;
+  width: 201px;
+  height: 50px;
+}
+.radiationnoncan {
+  margin-top: 6px;
+  margin-right: 6px;
+  display: flex;
 }
 
-.radiation_price div:hover {
-  background-color: #FFEA24;
+.line1{
+  position: absolute;
+  top: 298px;
+  left: 43.5%;
+  width: 201px;
+  height: 16px;
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.animal_price {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.pricetag {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.animal_price div:hover {
+background-color: #F2A0AF;
+}
+.line2{
+  position: absolute;
+  top: 367px;
+  left: 43.5%;
+  width: 201px;
+  height: 16px;
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.time_price {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.pricetag {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.time_price div:hover {
+background-color: #733A26;
+}
+.line3{
+  position: absolute;
+  top: 435px;
+  left: 43.5%;
+  width: 201px;
+  height: 16px;
+
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.crime_price {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.pricetag {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.crime_price div:hover {
+background-color: #E01212;
+color: #fff;
+}
+.line4{
+  position: absolute;
+  top: 504px;
+  left: 43.5%;
+  width: 201px;
+  height: 16px;
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.space_price {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.pricetag {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.space_price div:hover {
+background-color: #4333A6;
+color: #fff;
+}
+.line5{
+  position: absolute;
+  top: 570px;
+  left: 43.5%;
+  width: 201px;
+  height: 16px;
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.radiation_price {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.pricetag {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 10px;
 }
 
 .streetlamp img {
@@ -175,57 +356,4 @@ main {
   transform: translate(50%, -50%);
 }
 
-.animalnoncan,
-.timenoncan,
-.crimenoncan,
-.spacenoncan,
-.radiationnoncan {
-  position: fixed;
-  width: 50px;
-  height: 45px;
-  display: flex;
-  cursor: pointer;
-  padding-left: 10px;
-}
 
-.animalnoncan {
-  top: 29.3%;
-  left: 44.2%;
-  transform: translate(-50%, -50%);
-}
-
-.timenoncan {
-  top: 36.7%;
-  left: 44.2%;
-  transform: translate(-50%, -50%);
-}
-
-.crimenoncan {
-  top: 44.1%;
-  left: 44.2%;
-  transform: translate(-50%, -50%);
-}
-
-.spacenoncan {
-  top: 51.3%;
-  left: 43.7%;
-  transform: translate(-50%, -50%);
-}
-
-.radiationnoncan {
-  top: 58.8%;
-  left: 44.2%;
-  transform: translate(-50%, -50%);
-}
-
-.animalnoncan img,
-.timenoncan img,
-.crimenoncan img,
-.spacenoncan img,
-.radiationnoncan img {
-  padding-left: 14px;
-}
-
-.spacenoncan img {
-  padding-left: 26px;
-}
