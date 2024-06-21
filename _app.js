@@ -20,6 +20,9 @@ const server = http.createServer((req, res) => {
 
   if (req.method === "GET") {
     getMethodHandler(req, res);
+  }
+  else if (req.method === "POST") {
+    postMethodHandler(req, res);
   };
 
 }).listen(3000, () => { console.log('SERVER START : PORT 3000') });;
@@ -49,9 +52,40 @@ const getMethodHandler = (req, res) => {
     default:
       break;
   }
+};
+
+const postMethodHandler = (req, res) => {
+  switch (req.url) {
+    case "/signup":
+      postLoginProcessor(req, res);
+      break;
+  }
+
+}
+
+
+
+const postLoginProcessor = (req, res) => {
+  let body = "";
+  req.on("data", (data) => {
+    body += data;
+  });
+
+  req.on("end", () => {
+    const data = JSON.stringify(body);
+    
+    const id = data.split("&")[0].split("id=")[1];
+    const pw = data.split("&")[1].split("password=")[1];
+
+    
+    console.log(decodeURI(id));
+    console.log(decodeURI(pw));
+  })
+
 
 
 };
+
 
 
 /**
