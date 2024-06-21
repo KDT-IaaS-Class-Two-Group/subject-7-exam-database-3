@@ -1,19 +1,36 @@
-const database = require("sqlite3").verbose();
+const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
-const dbpath = path.join(__dirname, "test.db");
-const db = new database.Database(dbpath, (err) => {
-  console.log("에러 발생 : ", err);
+const dbPath = path.join(__dirname, "test.db");
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) {
+    console.error("Error opening database:", err);
+  } else {
+    console.log("Database opened successfully");
+  }
 });
-const createDb = (tableName) => {
-  db.run(
-    `CREATE TABLE ${tableName} (product TEXT NOT NULL, price INTEGER NOT NULL, position INTEGER NOT NULL)`,
-    (err) => {
-      if (err) {
-        console.log("오류 : ", err);
-      } else {
-        console.log("실행됨");
-      }
+
+function createTable(db, tableName, columns) {
+  const columnsDef = columns.map(column => `${column.name} ${column.type}`).join(', ');
+  const sql = `CREATE TABLE IF NOT EXISTS ${tableName} (${columnsDef})`;
+
+  db.run(sql, (err) => {
+    if (err) {
+      console.error(`Could not create table ${tableName}`, err);
+    } else {
+      console.log(`Table ${tableName} created`);
     }
-  );
+  });
+}
+
+const columns = [
+  { name: 'product', type: 'TEXT NOT NULL' },
+  { name: 'price', type: 'INTEGER NOT NULL' },
+  { name: 'position', type: 'INTEGER NOT NULL' }
+];
+
+createTable(db, 'TEST', columns);
+
+module.exports = {
+  createTable,
+  db
 };
-createDb("TEST");
