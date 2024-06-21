@@ -43,11 +43,19 @@ const server = http.createServer((req, res) => {
 
 const getMethodHandler = (req, res) => {
 
-  switch (req.url) {
-    case "/":
-      const contentType = getContentType(req.url);
-      sendFile(`${publicPath}index.html`, contentType, res);
+  const url = req.url;
+  const contentType = getContentType(url);
+  let fileName;
+
+  switch (true) {
+    case url === "/":
+      sendFile(`${publicPath}vending.html`, contentType, res);
       break;
+
+    case url.includes("/img/"):
+      fileName = url.split('/img/')[1];
+      sendFile(`./img/${fileName}`,contentType,res);
+      break
 
     default:
       break;
@@ -73,11 +81,11 @@ const postLoginProcessor = (req, res) => {
 
   req.on("end", () => {
     const data = JSON.stringify(body);
-    
+
     const id = data.split("&")[0].split("id=")[1];
     const pw = data.split("&")[1].split("password=")[1];
 
-    
+
     console.log(decodeURI(id));
     console.log(decodeURI(pw));
   })
@@ -113,6 +121,9 @@ const sendFile = (fileName, contentType, res) => {
 const getContentType = (url) => {
   if (url === "/") {
     return "text/html";
+  }
+  else if (url.includes("/img")){
+    return "image/png"
   }
 }
 
