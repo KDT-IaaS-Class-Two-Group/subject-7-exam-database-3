@@ -1,6 +1,6 @@
 const database = require("sqlite3").verbose();
-//경로는 일단 제가 임시적으로 지정하였습니다.
-const db= new database.Database("./public/JS/module/test.db")
+const path = require("path");
+const db= new database.Database(path.join(__dirname, "test.db"))
 
 const insertDb = (tableName,product,price,position) =>{
   const insert = db.prepare(`INSERT INTO ${tableName} (product, price, position) VALUES (?, ?, ?)`);
