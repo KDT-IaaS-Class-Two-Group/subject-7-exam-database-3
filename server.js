@@ -1,7 +1,8 @@
 //#region
 const http = require('http');
 const fs = require('fs');
-const publicPath = "public/HTML/";
+const htmlPath = "public/HTML/";
+const cssPath = "public/CSS/";
 //#endregion
 
 /**
@@ -13,7 +14,6 @@ const publicPath = "public/HTML/";
  *  
  */
 const server = http.createServer((req, res) => {
-  console.log(req.url)
 
   if (req.method === "GET") {
     getMethodHandler(req, res);
@@ -46,12 +46,17 @@ const getMethodHandler = (req, res) => {
 
   switch (true) {
     case url === "/":
-      sendFile(`${publicPath}vending.html`, contentType, res);
+      sendFile(`./${htmlPath}vending.html`, contentType, res);
+      break;
+
+    case url.includes("/CSS"):
+      fileName = url.split("/CSS/")[1];
+      sendFile(`./${cssPath+fileName}`, contentType, res);
       break;
 
     case url.includes("/img/"):
       fileName = url.split('/img/')[1];
-      sendFile(`./img/${fileName}`,contentType,res);
+      sendFile(`./img/${fileName}`, contentType, res);
       break
 
     default:
@@ -89,13 +94,10 @@ const postLoginProcessor = (req, res) => {
 
   req.on("end", () => {
     const data = JSON.stringify(body);
-
     const id = data.split("&")[0].split("id=")[1];
     const pw = data.split("&")[1].split("password=")[1];
-
-
-    console.log(decodeURI(id));
-    console.log(decodeURI(pw));
+    // console.log(decodeURI(id));
+    // console.log(decodeURI(pw));
   })
 
 };
@@ -137,11 +139,18 @@ const sendFile = (fileName, contentType, res) => {
  * 다른 분기 설정
  */
 const getContentType = (url) => {
-  if (url === "/") {
-    return "text/html";
-  }
-  else if (url.includes("/img")){
-    return "image/png"
+  try {
+    if (url === "/") {
+      return "text/html";
+    }
+    else if (url.includes("/img")) {
+      return "image/png";
+    }
+    else if (url.includes("/CSS")){
+      return "text/css";
+    }
+  } catch {
+    console.log(new Error());
   }
 }
 
