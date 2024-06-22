@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3');
-const table = require('./tableShcema.js');
+const table = require('./tableScheme.js');
 
 const databaseManager = (tableName, columns) => {
   const db = new sqlite3.Database('./product.db');
