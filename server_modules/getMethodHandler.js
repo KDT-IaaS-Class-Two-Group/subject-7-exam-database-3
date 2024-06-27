@@ -10,7 +10,8 @@
  * "login", "~~"과 같은 작업들을 수행해야할 필요가 있다. -> switch 구문에 모듈을 추가하는 방식으로 진행
  */
 
-const getContentType = require("./getContentType")
+const getContentType = require("./getContentType");
+const sendFile = require("./sendFile");
 const getMethodHandler = (req, res) => {
 
     const url = req.url;
