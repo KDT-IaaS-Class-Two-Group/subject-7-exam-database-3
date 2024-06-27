@@ -1,3 +1,4 @@
 node_modules
 **.db
 **/*.db
+/manager_source

@@ -51,7 +51,7 @@ const getMethodHandler = (req, res) => {
 
     case url.includes("/CSS"):
       fileName = url.split("/CSS/")[1];
-      sendFile(`./${cssPath+fileName}`, contentType, res);
+      sendFile(`./${cssPath + fileName}`, contentType, res);
       break;
 
     case url.includes("/img/"):
@@ -146,7 +146,7 @@ const getContentType = (url) => {
     else if (url.includes("/img")) {
       return "image/png";
     }
-    else if (url.includes("/CSS")){
+    else if (url.includes("/CSS")) {
       return "text/css";
     }
   } catch {
