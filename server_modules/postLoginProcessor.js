@@ -18,6 +18,7 @@ const postLoginProcessor = (req, res) => {
         const data = JSON.stringify(body);
         const id = data.split("&")[0].split("id=")[1];
         const pw = data.split("&")[1].split("password=")[1];
+        
       // console.log(decodeURI(id));
       // console.log(decodeURI(pw));
     })
