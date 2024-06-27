@@ -1,4 +1,4 @@
-@import '../SCSS/mixin.scss';
+@import "../SCSS/mixin.scss";
 
 * {
   @include reset;
@@ -50,32 +50,37 @@ main {
   @include flex-center;
   z-index: 1;
 
-  > div {
+  > :nth-child(1) {
     width: 60vw;
-    height: 80%;
+    height: 50vh;
     background-color: white;
     border-radius: 20px;
     box-shadow: -6px 8px 3px 3px #555555;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
 
-    > h1 {
-      padding: 50px;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+
+    > :nth-child(1) {
+      padding: 40px;
+      display: flex;
+      justify-content: center;
     }
 
-    .login {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
+    .login-view {
+      > label {
+        margin: 20px;
+      }
 
-      > input {
-        margin: 10px;
-        width: 200px;
-        height: 50px;
-        border: none;
-        border-bottom: solid;
+      .login {
+        @include flex-center;
+        flex-direction: column;
+        > input {
+          width: 200px;
+          height: 50px;
+          border: none;
+          border-bottom: solid;
+          text-align: center;
+        }
       }
     }
   }
