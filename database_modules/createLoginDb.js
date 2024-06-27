@@ -5,7 +5,7 @@ const database = require("sqlite3").verbose();
   });
   const createDb = (tableName) => {
     db.run(
-      `CREATE TABLE ${tableName} (id TEXT NOT NULL, cookie INTEGER NOT NULL)`,
+      `CREATE TABLE ${tableName} (id TEXT NOT NULL, cookie INTEGER)`,
       (err) => {
         if (err) {
           console.log("오류 : ", err);
