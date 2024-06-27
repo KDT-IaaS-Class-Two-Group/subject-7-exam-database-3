@@ -13,12 +13,16 @@ const getContentType = (url) => {
   try {
     if (url === "/") {
       return "text/html";
+    } else if (url === "/vending.js") {
+      return "application/javascript";
     } else if (url.includes("/img")) {
       return "image/png";
     } else if (url.includes("/CSS")) {
       return "text/css";
     } else if (url.includes("/JS")) {
       return "application/javascript";
+    } else if (url === "/index.html") {
+      return "text/html";
     }
   } catch {
     console.log(new Error());

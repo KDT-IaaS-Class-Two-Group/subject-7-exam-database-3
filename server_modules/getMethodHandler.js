@@ -25,6 +25,14 @@ const getMethodHandler = (req, res) => {
       sendFile(`./${htmlPath}vending.html`, contentType, res);
       break;
 
+    case url === "/index.html":
+      sendFile(`./public/HTML/index.html`, contentType, res);
+      break;
+
+    case url === "/vending.js":
+      sendFile(`./public/JS/vending.js`, contentType, res);
+      break;
+
     case url.includes("/CSS"):
       fileName = url.split("/CSS/")[1];
       sendFile(`./${cssPath + fileName}`, contentType, res);
@@ -34,10 +42,10 @@ const getMethodHandler = (req, res) => {
       fileName = url.split("/img/")[1];
       sendFile(`./img/${fileName}`, contentType, res);
       break;
-    case url.includes("/JS/"):
-      fileName = url.split("/JS/")[1];
-      sendFile(`./${jsPath + fileName}`, contentType, res);
-      break;
+    // case url.includes("/JS/"):
+    //   fileName = url.split("/JS/")[1];
+    //   sendFile(`./${jsPath + fileName}`, contentType, res);
+    //   break;
 
     default:
       break;
