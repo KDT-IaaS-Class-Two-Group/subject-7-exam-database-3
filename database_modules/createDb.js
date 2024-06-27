@@ -17,3 +17,4 @@ const database = require("sqlite3").verbose();
   };
 }
 
+module.exports = createLoginDb;
