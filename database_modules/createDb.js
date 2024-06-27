@@ -15,6 +15,7 @@ const database = require("sqlite3").verbose();
       }
     );
   };
+  createDb(tableName)
 }
 
 module.exports = createLoginDb;
