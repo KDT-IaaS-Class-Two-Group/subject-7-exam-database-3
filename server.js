@@ -1,8 +1,8 @@
 //#region
 const http = require('http');
 const fs = require('fs');
-const htmlPath = "public/HTML/";
-const cssPath = "public/CSS/";
+const postMethodHandler = require("./server_modules/postMethodHandler");
+const getMethodHandler = require("./server_modules/getMethodHandler")
 //#endregion
 
 /**
@@ -23,85 +23,3 @@ const server = http.createServer((req, res) => {
   };
 
 }).listen(3000, () => { console.log('SERVER START : PORT 3000') });;
-
-/**
- * ? postLoginProcessor : req객체에 포함되어있는 id,pw값을 추출하여 db에서 확인하는 모듈
- * @param {*} req : 요청객체
- * @param {*} res : 응답객체
- * 
- * ! 현재 진행한 작업 
- * id, pw값 추출 
- * 
- * ! 진행해야하는 작업
- * Database 모듈 접근, response 반환
- */
-
-const postLoginProcessor = (req, res) => {
-  let body = "";
-  req.on("data", (data) => {
-    body += data;
-  });
-
-  req.on("end", () => {
-    const data = JSON.stringify(body);
-    const id = data.split("&")[0].split("id=")[1];
-    const pw = data.split("&")[1].split("password=")[1];
-    // console.log(decodeURI(id));
-    // console.log(decodeURI(pw));
-  })
-
-};
-
-
-
-/**
- * ? sendFile: 핸들러에서 받아온 fileName과 contentType을 기반으로 response 객체 전송
- * @param {*} fileName 
- * @param {*} contentType 
- * @param {*} res 
- */
-const sendFile = (fileName, contentType, res) => {
-
-  fs.readFile(fileName, (err, data) => {
-    if (err) {
-      res.writeHead(500, { "Content-Type": "text/plain" });
-      res.end("500 ERROR");
-      return;
-    }
-
-    res.writeHead(200, { "Content-Type": contentType });
-    res.end(data);
-  })
-
-};
-
-
-
-/**
- * ? getContentType : 을 통해 Content-Type 값을 지정해준다.
- * @param {*} url : req.url
- * @returns : content type
- * 
- * ! 현재 진행한 작업
- * "/" 분기, html 지정
- * 
- * ! 진행해야하는 작업
- * 다른 분기 설정
- */
-const getContentType = (url) => {
-  try {
-    if (url === "/") {
-      return "text/html";
-    }
-    else if (url.includes("/img")) {
-      return "image/png";
-    }
-    else if (url.includes("/CSS")){
-      return "text/css";
-    }
-  } catch {
-    console.log(new Error());
-  }
-}
-
-

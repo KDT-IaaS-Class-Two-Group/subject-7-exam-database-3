@@ -12,6 +12,8 @@
 
 const getContentType = require("./getContentType");
 const sendFile = require("./sendFile");
+const htmlPath = "public/HTML/";
+const cssPath = "public/CSS/";
 const getMethodHandler = (req, res) => {
 
     const url = req.url;

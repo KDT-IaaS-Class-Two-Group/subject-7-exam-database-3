@@ -4,6 +4,8 @@
  * @param {*} contentType 
  * @param {*} res 
  */
+
+const fs = require('fs');
 const sendFile = (fileName, contentType, res) => {
 
     fs.readFile(fileName, (err, data) => {
