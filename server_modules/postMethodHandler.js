@@ -1,3 +1,4 @@
+const postLoginProcessor = require("./postLoginProcessor")
 const postMethodHandler = (req, res) => {
     switch (req.url) {
         case "/signup":
@@ -5,3 +6,4 @@ const postMethodHandler = (req, res) => {
         break;
     }
 }
+module.exports = postMethodHandler;
