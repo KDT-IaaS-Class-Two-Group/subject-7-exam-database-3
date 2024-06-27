@@ -34,11 +34,13 @@ main {
   position: fixed;
   top: 60px;
   right: -18%;
+  z-index: 100000;
 }
 
 .sun > img {
   width: 20%;
   height: 10%;
+  z-index: 10000;
 }
 
 .vending-machine > img {
@@ -68,20 +70,20 @@ main {
   display: flex;
 }
 .animalnoncan1:hover {
-background-color: #F2A0AF;
+  background-color: #f2a0af;
 }
 .animalnoncan2:hover {
-  background-color: #F2A0AF;
-  }
-  .animalnoncan3hover {
-    background-color: #F2A0AF;
-    }
-    .animalnoncan4:hover {
-      background-color: #F2A0AF;
-      }
-      .animalnoncan5:hover {
-        background-color: #F2A0AF;
-        }
+  background-color: #f2a0af;
+}
+.animalnoncan3hover {
+  background-color: #f2a0af;
+}
+.animalnoncan4:hover {
+  background-color: #f2a0af;
+}
+.animalnoncan5:hover {
+  background-color: #f2a0af;
+}
 .box2 {
   position: absolute;
   top: 315px;
@@ -95,20 +97,20 @@ background-color: #F2A0AF;
   display: flex;
 }
 .timenoncan1:hover {
-  background-color: #733A26;
-  }
-  .timenoncan2:hover {
-    background-color: #733A26;
-    }
-    .timenoncan3:hover {
-      background-color: #733A26;
-      }
-      .timenoncan4:hover {
-        background-color: #733A26;
-        }
-        .timenoncan5:hover {
-          background-color: #733A26;
-          }
+  background-color: #733a26;
+}
+.timenoncan2:hover {
+  background-color: #733a26;
+}
+.timenoncan3:hover {
+  background-color: #733a26;
+}
+.timenoncan4:hover {
+  background-color: #733a26;
+}
+.timenoncan5:hover {
+  background-color: #733a26;
+}
 
 .box3 {
   position: absolute;
@@ -123,19 +125,19 @@ background-color: #F2A0AF;
   display: flex;
 }
 .crimenoncan1:hover {
-  background-color: #E01212;
+  background-color: #e01212;
 }
 .crimenoncan2:hover {
-  background-color: #E01212;
+  background-color: #e01212;
 }
 .crimenoncan3:hover {
-  background-color: #E01212;
+  background-color: #e01212;
 }
 .crimenoncan4:hover {
-  background-color: #E01212;
+  background-color: #e01212;
 }
 .crimenoncan5:hover {
-  background-color: #E01212;
+  background-color: #e01212;
 }
 
 .box4 {
@@ -151,19 +153,19 @@ background-color: #F2A0AF;
   display: flex;
 }
 .spacenoncan1:hover {
-  background-color: #4333A6;
+  background-color: #4333a6;
 }
 .spacenoncan2:hover {
-  background-color: #4333A6;
+  background-color: #4333a6;
 }
 .spcaenoncan3:hover {
-  background-color: #4333A6;
+  background-color: #4333a6;
 }
 .spacenoncan4:hover {
-  background-color: #4333A6;
+  background-color: #4333a6;
 }
 .spacenoncan5:hover {
-  background-color: #4333A6;
+  background-color: #4333a6;
 }
 .box5 {
   position: absolute;
@@ -178,7 +180,7 @@ background-color: #F2A0AF;
   display: flex;
 }
 
-.line1{
+.line1 {
   position: absolute;
   top: 298px;
   left: 43.5%;
@@ -188,7 +190,6 @@ background-color: #F2A0AF;
   font-size: 10px;
   align-items: center;
   justify-content: space-around;
-
 }
 .animal_price {
   text-align: center;
@@ -203,9 +204,9 @@ background-color: #F2A0AF;
   margin-left: 10px;
 }
 .animal_price div:hover {
-background-color: #F2A0AF;
+  background-color: #f2a0af;
 }
-.line2{
+.line2 {
   position: absolute;
   top: 367px;
   left: 43.5%;
@@ -215,7 +216,6 @@ background-color: #F2A0AF;
   font-size: 10px;
   align-items: center;
   justify-content: space-around;
-
 }
 .time_price {
   text-align: center;
@@ -230,9 +230,9 @@ background-color: #F2A0AF;
   margin-left: 10px;
 }
 .time_price div:hover {
-background-color: #733A26;
+  background-color: #733a26;
 }
-.line3{
+.line3 {
   position: absolute;
   top: 435px;
   left: 43.5%;
@@ -243,7 +243,6 @@ background-color: #733A26;
   font-size: 10px;
   align-items: center;
   justify-content: space-around;
-
 }
 .crime_price {
   text-align: center;
@@ -258,10 +257,10 @@ background-color: #733A26;
   margin-left: 10px;
 }
 .crime_price div:hover {
-background-color: #E01212;
-color: #fff;
+  background-color: #e01212;
+  color: #fff;
 }
-.line4{
+.line4 {
   position: absolute;
   top: 504px;
   left: 43.5%;
@@ -271,7 +270,6 @@ color: #fff;
   font-size: 10px;
   align-items: center;
   justify-content: space-around;
-
 }
 .space_price {
   text-align: center;
@@ -286,10 +284,10 @@ color: #fff;
   margin-left: 10px;
 }
 .space_price div:hover {
-background-color: #4333A6;
-color: #fff;
+  background-color: #4333a6;
+  color: #fff;
 }
-.line5{
+.line5 {
   position: absolute;
   top: 570px;
   left: 43.5%;
@@ -299,7 +297,6 @@ color: #fff;
   font-size: 10px;
   align-items: center;
   justify-content: space-around;
-
 }
 .radiation_price {
   text-align: center;
@@ -355,5 +352,3 @@ color: #fff;
   right: 20%;
   transform: translate(50%, -50%);
 }
-
-
