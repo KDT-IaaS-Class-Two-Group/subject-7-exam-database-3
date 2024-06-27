@@ -11,7 +11,7 @@ const insertBasicLoginDb =(tableName)=>{
   
   const id = ["panda", "alpaca", "penguin", "marmot", "cheetah"]
   for (let i = 0; i < id.length; i++) {
-    insertDb(tableName, id[i])
+    insertDb(id[i])
   }
 }
 module.exports=insertBasicLoginDb;
