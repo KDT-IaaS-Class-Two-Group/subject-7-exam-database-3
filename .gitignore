@@ -2,3 +2,5 @@ node_modules
 **.db
 **/*.db
 /manager_source
+/public/SCSS/*.css
+/public/SCSS/*.css.map
