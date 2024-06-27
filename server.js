@@ -1,2 +1,2 @@
-const serverSet = require("./serverSet")
-serverSet(3000)
+const serverSet = require("./server_modules/serverSet");
+serverSet(3000);
