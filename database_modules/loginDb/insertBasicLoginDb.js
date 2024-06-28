@@ -1,7 +1,7 @@
 const insertBasicLoginDb = (tableName) => {
   const database = require("sqlite3").verbose();
 
-  const db = new database.Database("../../database/login.db");
+  const db = new database.Database("./database/login.db");
 
   const insertDb = (id) => {
     const insert = db.prepare(`INSERT INTO ${tableName} (id) VALUES (?)`);
