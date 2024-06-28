@@ -1,15 +1,13 @@
-class ValidationInterface{
-  idValidtion(){
+class ValidationInterface {
+  idValidtion() {
     throw new Error('오버라이드 안 했음');
   };
-  pwValidtion(){
+  pwValidtion() {
     throw new Error('오버라이드 안 했음');
   };
 };
 
-class ValidationManager extends ValidationInterface{
-  constructor(){
-  }
+export class ValidationManager extends ValidationInterface {
   idValidation(value) {
     return /^[a-zA-Zㄱ-힣0-9.]{2,12}$/.test(value);
   }
