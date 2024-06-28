@@ -18,6 +18,7 @@ const postLoginProcessor = (req, res) => {
     const data = JSON.stringify(body);
     const id = data.split("&")[0].split("id=")[1];
     console.log(decodeURI(id));
+    //login DB 조회 후 맞다면,vending.html로 연결
   });
 };
 module.exports = postLoginProcessor;
