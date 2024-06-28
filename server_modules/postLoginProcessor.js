@@ -1,13 +1,7 @@
 /**
- * ? postLoginProcessor : req객체에 포함되어있는 id,pw값을 추출하여 db에서 확인하는 모듈
+ * ? postLoginProcessor : req객체에 포함되어있는 id값을 추출하여 콘솔에 출력하는 모듈
  * @param {*} req : 요청객체
  * @param {*} res : 응답객체
- *
- * ! 현재 진행한 작업
- * id, pw값 추출
- *
- * ! 진행해야하는 작업
- * Database 모듈 접근, response 반환
  */
 const postLoginProcessor = (req, res) => {
   let body = "";
@@ -15,14 +9,20 @@ const postLoginProcessor = (req, res) => {
     body += data;
   });
   req.on("end", () => {
-    const data = JSON.parse(body);
-    // const id = data.split("&")[0].split("id=")[1];
-    const id = data.id;
-    console.log(body);
-    console.log(data);
-    console.log(id);
+    try {
+      const data = JSON.parse(body);
+      const id = data.id;
+      console.log("Received ID:", id);
 
-    //login DB 조회 후 맞다면,vending.html로 연결, 쿠키 설정 / database 쿠키 넣기
+      // 응답
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: "Login request received", id: id }));
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Invalid JSON" }));
+    }
   });
 };
+
 module.exports = postLoginProcessor;
