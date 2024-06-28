@@ -1,20 +1,24 @@
 const sun = document.querySelector(".sun");
 const can = document.querySelector(".can");
-// sun.addEventListener("click", (event) => {
-//   event.preventDefault();
-//   console.log("dd");
-//   window.location.href = "./public/HTML/index.html";
-//   // fetch("/Gologin", {
-//   //   method: "POST",
-//   //   headers: {
-//   //     "Content-Type": "application/json",
-//   //   },
-//   //   body: JSON.stringify("로그인 요청"),
-//   // });
-// });
 
-sun.addEventListener("click", () => {
+sun.addEventListener("click", (event) => {
+  event.preventDefault();
   can.style.backgroundColor = "red";
+  fetch("/Gologin", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify("로그인 요청"),
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      console.log(data);
+      document.open();
+      document.write(data);
+      document.close();
+    })
+    .catch((error) => console.error("Error:", error));
 });
 
 document.addEventListener("DOMContentLoaded", function () {

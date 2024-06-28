@@ -1,5 +1,6 @@
 const path = require("path");
 const sendFile = require("./sendFile");
+const postLoginProcessor = require("./postLoginProcessor");
 
 const postMethodHandler = (req, res) => {
   switch (req.url) {
@@ -14,7 +15,13 @@ const postMethodHandler = (req, res) => {
       req.on("end", () => {
         const data = JSON.parse(body);
         console.log(data);
-        const filePath = path.join(__dirname, "..", "public", "HTML", "index.html");
+        const filePath = path.join(
+          __dirname,
+          "..",
+          "public",
+          "HTML",
+          "index.html"
+        );
         const contentType = "text/html";
         sendFile(filePath, contentType, res);
       });
