@@ -7,11 +7,7 @@ const jsPath = path.join(__dirname, "..", "public", "JS");
 
 const getMethodHandler = (req, res) => {
   const url = req.url;
-<<<<<<< HEAD
   const contentType = getContentType(url); // contentType을 가져옵니다.
-=======
-  const contentType = getContentType(url);
->>>>>>> connnect
   let fileName;
 
   switch (true) {

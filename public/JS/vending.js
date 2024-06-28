@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-const sun = document.getElementById("suns");
 sun.addEventListener("click", (event) => {
   event.preventDefault();
   console.log("dd");
@@ -24,9 +22,7 @@ sun.addEventListener("click", (event) => {
   });
 });
 // const sun = document.querySelector(".sun");
-=======
 const sun = document.querySelector(".sun");
->>>>>>> connnect
 const can = document.querySelector(".can");
 
 sun.addEventListener("click", (event) => {
