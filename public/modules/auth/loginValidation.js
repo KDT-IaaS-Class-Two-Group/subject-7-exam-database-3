@@ -1,11 +1,4 @@
-class ValidationInterface {
-  idValidtion() {
-    throw new Error('오버라이드 안 했음');
-  };
-  pwValidtion() {
-    throw new Error('오버라이드 안 했음');
-  };
-};
+import { ValidationInterface } from "./abstract/validation.js";
 
 export class ValidationManager extends ValidationInterface {
   idValidation(value) {
