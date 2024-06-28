@@ -27,7 +27,9 @@ const postLoginProcessor = (req, res) => {
           const row = rows[0];
           console.log("Rows from database:", row.id);
           updateLoginDb("login", "state", "on", "id", id);
-          res.writeHead(200, { "Content-Type": "application/json" });
+          res.writeHead(200, {
+            "Content-Type": "application/json",
+          });
           res.end();
         }
       });

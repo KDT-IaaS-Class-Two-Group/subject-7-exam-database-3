@@ -18,6 +18,6 @@ document.getElementById("signup").addEventListener("click", function (event) {
       }
       return response.json();
     })
-    .then((data) => console.log("Success:", data))
+    .then((data) => console.log("Success:", data), (window.location.href = "/"))
     .catch((error) => console.error("Error:", error));
 });
