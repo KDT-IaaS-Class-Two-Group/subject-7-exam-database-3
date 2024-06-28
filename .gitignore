@@ -1,3 +1,16 @@
+# 패키지
 node_modules
+
+# 데이터베이스 파일 제외
 **.db
 **/*.db
+
+# 관리자페이지 이미지 제외
+/manager_source
+
+# SCSS 경로 내부에 존재하는 CSS 예외처리
+/public/SCSS/*.css
+/public/SCSS/*.css.map
+
+# MAC
+.DS_Store

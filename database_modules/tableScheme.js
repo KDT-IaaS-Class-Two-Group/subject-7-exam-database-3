@@ -18,4 +18,4 @@ const orders = [
   { foreign: "FOREIGN KEY(product) REFERENCES product(product)" }
 ];
 
-module.exports = {product, members, orders};
+module.exports = { product, members, orders };

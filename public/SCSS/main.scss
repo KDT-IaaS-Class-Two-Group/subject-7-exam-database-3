@@ -1,0 +1,114 @@
+@import "../SCSS/mixin.scss";
+
+* {
+  @include reset;
+}
+
+body {
+  background-image: url(../../manager_source/background.png);
+  background-size: cover;
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+  height: 100vh;
+  overflow: hidden;
+  grid-template-areas:
+    "top"
+    "bot";
+}
+input:focus {
+  outline: none;
+}
+
+
+header {
+  grid-area: top;
+  @include flex-center;
+  width: 100%;
+  height: 100%;
+
+  > :nth-child(1) {
+    @include flex-center;
+    align-items: baseline;
+    position: relative;
+
+    > :nth-child(1) {
+      @include flex-center;
+
+      > :nth-child(1) {
+        width: 50%;
+      }
+    }
+
+    > :nth-child(2) {
+      width: 120px;
+      position: absolute;
+      z-index: -1;
+      top: 60px;
+      right: 150px;
+    }
+  }
+}
+
+main {
+  grid-area: bot;
+  @include flex-center;
+  z-index: 1;
+
+  > :nth-child(1) {
+    width: 60vw;
+    height: 50vh;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: -6px 8px 3px 3px #555555;
+
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+
+    > :nth-child(1) {
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .login-view {
+      > label {
+        margin: 20px;
+      }
+
+      .login {
+        @include flex-center;
+        flex-direction: column;
+        > input {
+          width: 200px;
+          height: 50px;
+          border: none;
+          border-bottom: solid;
+          
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: url("../../manager_source/star.png") no-repeat center center;
+  background-size: contain;
+  opacity: 0;
+  animation: blink 2s linear forwards;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
