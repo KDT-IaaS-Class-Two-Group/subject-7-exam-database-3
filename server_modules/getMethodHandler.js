@@ -8,11 +8,11 @@ const jsPath = path.join(__dirname, "..", "public", "JS");
 const getMethodHandler = (req, res) => {
   const url = req.url;
   const contentType = getContentType(url); // contentType을 가져옵니다.
+  console.log(req.url)
   let fileName;
-
   switch (true) {
     case url === "/":
-      sendFile(path.join(htmlPath, "vending.html"), contentType, res);
+      sendFile(path.join(htmlPath, "manager.html"), contentType, res);
       break;
 
     case url === "/HTML/index.html":
@@ -38,6 +38,18 @@ const getMethodHandler = (req, res) => {
       sendFile(path.join(jsPath, fileName), contentType, res);
       break;
 
+    case url.includes('/modules/'):
+      sendFile(path.join("./public", req.url), contentType, res);
+      break;
+
+    case url.includes('/SCSS/'):
+      sendFile(path.join("./public", req.url), contentType, res);
+      break;
+
+    case url.includes('/manager_source/'):
+      console.log(path.join(".", req.url))
+      sendFile(path.join(".", req.url), contentType, res);
+      break;
     default:
       res.writeHead(404, { "Content-Type": "text/plain" });
       res.end("Not Found");
