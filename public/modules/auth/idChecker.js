@@ -1,19 +1,20 @@
-class Checker {
-  check() { throw new Error('오버라이드 에러') };
-}
+import { ValidationManager } from "./loginValidation.js";
+import { Checker } from "./abstract/checker.js"
 
-class IdChecker extends Checker {
+export class IdChecker extends Checker {
   constructor(validationManager) {
+    super();
     if (validationManager instanceof ValidationManager) {
       this.validationManager = validationManager;
     } else {
-      throw new Error('인스턴스 안 됨');
+      throw new Error('주입 실패');
     }
   }
+
   check() {
     document.getElementById('id').addEventListener('input', (e) => {
-      const valid = this.validationManager.idValidation(e.target.value);
+      const isValid = this.validationManager.idValidation(e.target.value);
       e.target.style.borderColor = isValid ? "green" : "red";
-    })
+    });
   }
 }
