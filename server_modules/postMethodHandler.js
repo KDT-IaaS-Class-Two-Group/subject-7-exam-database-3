@@ -5,6 +5,7 @@ const postLoginProcessor = require("./postLoginProcessor");
 const postMethodHandler = (req, res) => {
   switch (req.url) {
     case "/login":
+      console.log("d");
       postLoginProcessor(req, res);
       break;
     case "/Gologin":
