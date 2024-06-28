@@ -1,7 +1,9 @@
 const selectDb = require("../database_modules/loginDb/selectLoginDb");
 const updateLoginDb = require("../database_modules/loginDb/updataLoginDb");
 const crypto = require("crypto");
+const sendFile = require("./sendFile"); // sendFile 모듈 로드
 const sessions = {};
+
 const postLoginProcessor = (req, res) => {
   let body = "";
   req.on("data", (data) => {
@@ -15,17 +17,14 @@ const postLoginProcessor = (req, res) => {
 
       selectDb("*", "login", "id", id, (err, rows) => {
         if (err) {
-          console.error("서버 select", err);
-          // 데이터베이스 조회 에러 응답
-          res.writeHead(200, { "Content-Type": "application/json" });
-          res.end(console.log("ddd"));
+          console.error("Database select error:", err);
+          res.writeHead(500, { "Content-Type": "text/plain" });
+          res.end("Database select error");
         } else if (rows.length === 0) {
-          //input id와 일치하지 않을 때
           console.log("No matching record found for ID:", id);
           res.writeHead(404, { "Content-Type": "application/json" });
-          res.end(console.log("일치하지않음"));
+          res.end(JSON.stringify({ loggedIn: false }));
         } else {
-          // input id와 일치할 때
           const row = rows[0];
           console.log("Rows from database:", row.id);
           updateLoginDb("login", "state", "on", "id", id);
@@ -33,14 +32,13 @@ const postLoginProcessor = (req, res) => {
           sessions[sessionId] = row.id;
           res.writeHead(200, {
             "Set-Cookie": `sessionId=${sessionId}; HttpOnly;`,
-            "Content-Type": "text.plain",
+            "Content-Type": "application/json",
           });
-          res.end();
+          res.end(JSON.stringify({ loggedIn: true, username: row.username }));
         }
       });
     } catch (error) {
       console.error("Error parsing JSON:", error);
-      // 잘못된 JSON 요청 응답
       res.writeHead(400, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ error: "Invalid JSON" }));
     }

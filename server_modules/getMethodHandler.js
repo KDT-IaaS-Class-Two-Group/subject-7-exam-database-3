@@ -7,11 +7,14 @@ const jsPath = path.join(__dirname, "..", "public", "JS");
 
 const getMethodHandler = (req, res) => {
   const url = req.url;
-  const contentType = getContentType(url); 
+  const contentType = getContentType(url);
   let fileName;
 
   switch (true) {
     case url === "/":
+      if (req.headers.cookie) {
+        console.log("Cookie:", req.headers.cookie);
+      }
       sendFile(path.join(htmlPath, "vending.html"), contentType, res);
       break;
 

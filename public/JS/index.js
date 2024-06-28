@@ -18,6 +18,16 @@ document.getElementById("signup").addEventListener("click", function (event) {
       }
       return response.json();
     })
-    .then((data) => console.log("Success:", data), (window.location.href = "/"))
-    .catch((error) => console.error("Error:", error));
+    .then((data) => {
+      console.log("Success:", data);
+      if (data.loggedIn) {
+        // 로그인 성공 시 처리할 내용
+        console.log("Login successful");
+        window.location.href = "/"; // 홈 화면으로 이동
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("입력한 아이디가 데이터 베이스에 존재하지 않습니다.");
+    });
 });
