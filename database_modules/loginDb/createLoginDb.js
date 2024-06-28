@@ -1,6 +1,6 @@
-const createLoginDb = (tableName)=>{
-const database = require("sqlite3").verbose();
-  const db = new database.Database("./database/login.db", (err) => {
+const createLoginDb = (tableName) => {
+  const database = require("sqlite3").verbose();
+  const db = new database.Database("../../database/login.db", (err) => {
     console.log("에러 발생 : ", err);
   });
   const createDb = (tableName) => {
@@ -15,7 +15,7 @@ const database = require("sqlite3").verbose();
       }
     );
   };
-  createDb(tableName)
-}
+  createDb(tableName);
+};
 
 module.exports = createLoginDb;
