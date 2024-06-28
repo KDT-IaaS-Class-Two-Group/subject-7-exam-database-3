@@ -15,6 +15,10 @@ body {
     "top"
     "bot";
 }
+input:focus {
+  outline: none;
+}
+
 
 header {
   grid-area: top;
@@ -79,6 +83,7 @@ main {
           height: 50px;
           border: none;
           border-bottom: solid;
+          
           text-align: center;
         }
       }
