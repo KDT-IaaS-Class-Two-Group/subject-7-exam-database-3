@@ -1,5 +1,7 @@
 const selectDb = require("../database_modules/loginDb/selectLoginDb");
 const updateLoginDb = require("../database_modules/loginDb/updataLoginDb");
+const crypto = require("crypto");
+const sessions = {};
 const postLoginProcessor = (req, res) => {
   let body = "";
   req.on("data", (data) => {
@@ -27,8 +29,11 @@ const postLoginProcessor = (req, res) => {
           const row = rows[0];
           console.log("Rows from database:", row.id);
           updateLoginDb("login", "state", "on", "id", id);
+          const sessionId = crypto.randomBytes(16).toString("hex");
+          sessions[sessionId] = row.id;
           res.writeHead(200, {
-            "Content-Type": "application/json",
+            "Set-Cookie": `sessionId=${sessionId}; HttpOnly;`,
+            "Content-Type": "text.plain",
           });
           res.end();
         }
