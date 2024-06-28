@@ -15,7 +15,7 @@ const selectLoginDb = (
     [value],
     (err, rows) => {
       if (err) {
-        console.error("select 부분 error:", err);
+        console.error("select 파일:", err);
         callback(err, null); // 에러 발생 시 콜백에 에러를 전달
       } else {
         callback(null, rows); // 조회 결과를 콜백에 전달

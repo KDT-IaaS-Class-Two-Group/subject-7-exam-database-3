@@ -11,25 +11,24 @@ const postLoginProcessor = (req, res) => {
       const id = data.id;
       console.log("Received ID:", id);
 
-      // selectDb 함수를 비동기적으로 호출하여 데이터베이스에서 데이터를 가져옴
-      selectDb("*", "login", "id", "panda", (err, rows) => {
+      selectDb("*", "login", "id", id, (err, rows) => {
         if (err) {
-          console.error("Error in selectDb:", err);
+          console.error("서버 select", err);
           // 데이터베이스 조회 에러 응답
-          res.writeHead(500, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Database error" }));
-        } else {
-          // 조회 성공 시 rows가 담기고 여기서 처리
-          console.log("Rows from database:", rows);
-          // 응답
           res.writeHead(200, { "Content-Type": "application/json" });
-          res.end(
-            JSON.stringify({
-              message: "Login request received",
-              id: id,
-              data: rows,
-            })
-          );
+          res.end(console.log("ddd"));
+        } else if (rows.length === 0) {
+          //input id와 일치하지 않을 때
+          console.log("No matching record found for ID:", id);
+          res.writeHead(404, { "Content-Type": "application/json" });
+          res.end(console.log("일치하지않음"));
+        } else {
+          // input id와 일치할 때
+          const row = rows[0];
+          console.log("Rows from database:", row.id);
+
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end();
         }
       });
     } catch (error) {
