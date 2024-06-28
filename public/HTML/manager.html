@@ -16,7 +16,6 @@
       </div>
     </header>
     <main class="main-container">
-
       <div id="loginComponent">
         <div>
           <h1>Sign In</h1>
@@ -24,16 +23,20 @@
         <div class="login-view">
           <label for="" class="login section">
             <span>name</span>
-            <input type="text" placeholder="name" />
+            <input type="text" placeholder="name" id= "id" / >
           </label>
           <label for="" class="login section">
             <span>password</span>
-            <input type="password" placeholder="password" />
+            <input type="password" placeholder="password" id="pw" />
           </label>
         </div>
       </div>
-      
     </main>
   </body>
-  <!-- <script src="../modules/star.js"></script> -->
+  <script src="../modules/animation/star.js"></script>
+  <script src="../modules/auth/abstract/checker.js" type="module"></script>
+  <script src="../modules/auth/loginValidation.js" type="module"></script>
+  <script src="../modules/auth/idChecker.js" type="module"></script>
+  <script src="../modules/auth/pwChecker.js" type="module"></script>
+  <script src="../modules/main.js" type="module"></script>
 </html>
