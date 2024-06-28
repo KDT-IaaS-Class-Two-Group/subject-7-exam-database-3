@@ -1,354 +1,395 @@
-* {
-  padding: 0;
+/* Reset styles */
+body,
+html {
   margin: 0;
-  box-sizing: border-box;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  overflow: visible;
 }
 
 body {
-  background-color: #fff;
-  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-main {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
+.image-container {
+  min-height: 19vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
 }
 
 .title {
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-}
-
-.title > img {
-  margin-left: 30%;
-  margin-top: 3%;
-  width: 40%;
-  height: 10%;
+  max-width: 50%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
 }
 
 .sun {
-  position: fixed;
-  top: 60px;
-  right: -18%;
-  z-index: 100000;
+  max-width: 8vw;
+  height: auto;
+  margin-left: 70vw;
+  transition: transform 0.3s ease-in-out;
+  position: absolute;
+  right: 3vw;
 }
 
-.sun > img {
-  width: 20%;
-  height: 10%;
-  z-index: 10000;
-}
-
-.vending-machine > img {
-  position: fixed;
-  margin-top: 13%;
-  margin-left: 38%;
-  width: 23%;
-  height: 58%;
-}
-.can {
-  width: 80px;
-  height: 40px;
+/* Main styles for the vending machine */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
   background-color: #fff;
-  margin-left: 10px;
+}
+
+.vending-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end; /* Align items to the bottom */
+  width: 100%;
+  flex-grow: 1;
+  position: relative;
+  padding-bottom: 10vh;
+  box-shadow: -80px 0px 0px black;
+}
+
+.vending-machine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+  position: relative; /* Ensure the legs are positioned correctly */
+  box-shadow: -80px 0px 0px black;
+}
+
+.machine {
+  padding-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 65%;
+  height: 450px;
+  background-color: black;
+  padding: 10px;
   border-radius: 10px;
-}
-.box1 {
-  position: absolute;
-  top: 245px;
-  left: 43.5%;
-  width: 201px;
-  height: 50px;
-}
-.animalnoncan {
-  margin-top: 6px;
-  margin-right: 6px;
-  display: flex;
-}
-.animalnoncan1:hover {
-  background-color: #f2a0af;
-}
-.animalnoncan2:hover {
-  background-color: #f2a0af;
-}
-.animalnoncan3hover {
-  background-color: #f2a0af;
-}
-.animalnoncan4:hover {
-  background-color: #f2a0af;
-}
-.animalnoncan5:hover {
-  background-color: #f2a0af;
-}
-.box2 {
-  position: absolute;
-  top: 315px;
-  left: 43.5%;
-  width: 201px;
-  height: 50px;
-}
-.timenoncan {
-  margin-top: 6px;
-  margin-right: 6px;
-  display: flex;
-}
-.timenoncan1:hover {
-  background-color: #733a26;
-}
-.timenoncan2:hover {
-  background-color: #733a26;
-}
-.timenoncan3:hover {
-  background-color: #733a26;
-}
-.timenoncan4:hover {
-  background-color: #733a26;
-}
-.timenoncan5:hover {
-  background-color: #733a26;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  margin-left: 20px; /* Adjusted margin-left to move right */
 }
 
-.box3 {
-  position: absolute;
-  top: 385px;
-  left: 43.5%;
-  width: 201px;
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.can {
+  width: 40px;
   height: 50px;
-}
-.crimenoncan {
-  margin-top: 6px;
-  margin-right: 6px;
+  background-color: white;
+  border-radius: 3px;
+  margin: 5px;
   display: flex;
-}
-.crimenoncan1:hover {
-  background-color: #e01212;
-}
-.crimenoncan2:hover {
-  background-color: #e01212;
-}
-.crimenoncan3:hover {
-  background-color: #e01212;
-}
-.crimenoncan4:hover {
-  background-color: #e01212;
-}
-.crimenoncan5:hover {
-  background-color: #e01212;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
 }
 
-.box4 {
+.label {
   position: absolute;
-  top: 453px;
-  left: 43.5%;
-  width: 201px;
-  height: 50px;
-}
-.spacenoncan {
-  margin-top: 6px;
-  margin-right: 6px;
-  display: flex;
-}
-.spacenoncan1:hover {
-  background-color: #4333a6;
-}
-.spacenoncan2:hover {
-  background-color: #4333a6;
-}
-.spcaenoncan3:hover {
-  background-color: #4333a6;
-}
-.spacenoncan4:hover {
-  background-color: #4333a6;
-}
-.spacenoncan5:hover {
-  background-color: #4333a6;
-}
-.box5 {
-  position: absolute;
-  top: 523px;
-  left: 43.5%;
-  width: 201px;
-  height: 50px;
-}
-.radiationnoncan {
-  margin-top: 6px;
-  margin-right: 6px;
-  display: flex;
+  bottom: -25px;
+  font-size: 12px;
+  color: white;
 }
 
-.line1 {
-  position: absolute;
-  top: 298px;
-  left: 43.5%;
-  width: 201px;
-  height: 16px;
+/* Coin slot styles */
+.coin-slot {
   display: flex;
-  font-size: 10px;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-}
-.animal_price {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.pricetag {
-  background-color: #fff;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-.animal_price div:hover {
-  background-color: #f2a0af;
-}
-.line2 {
-  position: absolute;
-  top: 367px;
-  left: 43.5%;
-  width: 201px;
-  height: 16px;
-  display: flex;
-  font-size: 10px;
-  align-items: center;
-  justify-content: space-around;
-}
-.time_price {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.pricetag {
-  background-color: #fff;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-.time_price div:hover {
-  background-color: #733a26;
-}
-.line3 {
-  position: absolute;
-  top: 435px;
-  left: 43.5%;
-  width: 201px;
-  height: 16px;
-
-  display: flex;
-  font-size: 10px;
-  align-items: center;
-  justify-content: space-around;
-}
-.crime_price {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.pricetag {
-  background-color: #fff;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-.crime_price div:hover {
-  background-color: #e01212;
-  color: #fff;
-}
-.line4 {
-  position: absolute;
-  top: 504px;
-  left: 43.5%;
-  width: 201px;
-  height: 16px;
-  display: flex;
-  font-size: 10px;
-  align-items: center;
-  justify-content: space-around;
-}
-.space_price {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.pricetag {
-  background-color: #fff;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-.space_price div:hover {
-  background-color: #4333a6;
-  color: #fff;
-}
-.line5 {
-  position: absolute;
-  top: 570px;
-  left: 43.5%;
-  width: 201px;
-  height: 16px;
-  display: flex;
-  font-size: 10px;
-  align-items: center;
-  justify-content: space-around;
-}
-.radiation_price {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.pricetag {
-  background-color: #fff;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-
-.streetlamp img {
+  justify-content: center;
   width: 25%;
+  margin-top: 30px;
 }
 
-.animal_lamp,
-.crime_lamp,
-.radiation_lamp,
-.space_lamp,
-.time_lamp {
-  position: fixed;
+.screen,
+.slot {
+  width: 80px;
+  height: 100px;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
-.animal_lamp {
-  top: 60%;
-  left: 17%;
-  transform: translate(-50%, -50%);
+.slot {
+  height: 30px;
+  background-color: #000;
 }
 
-.crime_lamp {
-  top: 58.3%;
-  left: 27%;
-  transform: translate(-50%, -50%);
+.coin-label {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.radiation_lamp {
-  top: 59%;
-  left: 40%;
-  transform: translate(-50%, -50%);
+/* Output area styles */
+.output {
+  width: 70%;
+  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 15px;
+  height: 5vh;
 }
 
-.space_lamp {
-  top: 57%;
-  right: 2%;
-  transform: translate(50%, -50%);
+.output-label {
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.time_lamp {
-  top: 57.5%;
-  right: 20%;
-  transform: translate(50%, -50%);
+.legs {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  position: absolute;
+  bottom: -10px; /* 위치 조정 */
+}
+
+.leg {
+  width: 40px;
+  height: 20px;
+  background-color: black;
+  border-radius: 5px;
+}
+
+.lamp-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; /* Align lamps to the bottom */
+  align-items: center;
+  margin: 0 50px;
+  gap: 3vw;
+}
+
+.left-lamps {
+  margin-right: 0px;
+  margin-left: 0;
+}
+
+.right-lamps {
+  margin-left: 10px;
+}
+
+.lamp-container img {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  margin: 8px 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.lamp-container.right-lamps {
+  gap: 2vw;
+}
+
+.animallamp {
+  background-image: url(/img/animallamp_non.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 6vw;
+  height: 42vh;
+}
+.animallamplight {
+  display: none;
+  background-image: url(/img/animallamp_light.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 6vw;
+  height: 42vh;
+  display: none;
+}
+.timelamp {
+  background-image: url(/img/timelamp_none.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 6vw;
+  height: 37vh;
+}
+.timelamplight {
+  background-image: url(/img/timelamp_light.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 6vw;
+  height: 37vh;
+  display: none;
+}
+
+.radiationlamp {
+  background-image: url(/img/radiationlamp_non.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 6vw;
+  height: 41vh;
+}
+.radiationlamplight {
+  background-image: url(/img/radiaitonlamp_light.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 6vw;
+  height: 41vh;
+  display: none;
+}
+
+.spacelamp {
+  background-image: url(/img/spacelamp_non.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 5vw;
+  height: 40vh;
+}
+.spacelamplight {
+  background-image: url(/img/spacelamp_light.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 5vw;
+  height: 40vh;
+  display: none;
+}
+
+.crimelamp {
+  background-image: url(/img/crimelamp_non.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 6vw;
+  height: 40vh;
+}
+.crimelamplight {
+  background-image: url(/img/crimelamp_light.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 6vw;
+  height: 40vh;
+  display: none;
+}
+
+/* Media query for tablets and smaller devices */
+@media (max-width: 1279px) {
+  .vending-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Ensure the container takes the full height */
+  }
+
+  .vending-machine {
+    transform: scale(0.75);
+  }
+
+  .lamp-container {
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    margin-top: 15vw;
+  }
+  .left-lamps {
+    margin-right: 0;
+    margin-left: 1.8vw;
+  }
+
+  .right-lamps {
+    margin-left: 1.8vw;
+  }
+}
+
+/* Media query for mobile phones */
+@media (max-width: 480px) {
+  .vending-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Ensure the container takes the full height */
+  }
+
+  .vending-machine {
+    transform: scale(0.6);
+    margin: 1vw 0;
+  }
+
+  .lamp-container {
+    padding-top: 5vw;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    margin: 1vw 0;
+    height: auto; /* Ensure the lamp container fits within the height */
+  }
+
+  .lamp-container img,
+  .lamp-container .timelamp,
+  .lamp-container .radiationlamp,
+  .lamp-container .spacelamp,
+  .lamp-container .animallamp,
+  .lamp-container .crimelamp {
+    width: 15vw;
+    height: 25vh; /* Adjusted height to fit within the viewport */
+    margin: 0 0.5vw;
+    display: block; /* Ensure images are always displayed */
+  }
+
+  .left-lamps,
+  .right-lamps {
+    justify-content: center;
+    display: flex; /* Ensure right-lamps are displayed */
+  }
+
+  .right-lamps {
+    display: flex !important; /* Ensure right-lamps are displayed */
+  }
+}
+
+@media (max-width: 600px) {
+  .spacelamp,
+  .timelamp,
+  .animallamp,
+  .radiationlamp,
+  .crimelamp {
+    display: block !important; /* Ensure images are always displayed */
+  }
+
+  img {
+    flex: 1 1 auto; /* Ensure images are always displayed */
+    display: block;
+  }
 }
