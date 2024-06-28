@@ -1,5 +1,5 @@
 const selectDb = require("../database_modules/loginDb/selectLoginDb");
-
+const updateLoginDb = require("../database_modules/loginDb/updataLoginDb");
 const postLoginProcessor = (req, res) => {
   let body = "";
   req.on("data", (data) => {
@@ -26,7 +26,7 @@ const postLoginProcessor = (req, res) => {
           // input id와 일치할 때
           const row = rows[0];
           console.log("Rows from database:", row.id);
-
+          updateLoginDb("login", "state", "on", "id", id);
           res.writeHead(200, { "Content-Type": "application/json" });
           res.end();
         }
