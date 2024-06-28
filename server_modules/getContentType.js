@@ -37,4 +37,6 @@ const getContentType = (url) => {
     return "application/octet-stream"; // 에러 발생 시 기본값
   }
 };
+
 module.exports = getContentType;
+  
