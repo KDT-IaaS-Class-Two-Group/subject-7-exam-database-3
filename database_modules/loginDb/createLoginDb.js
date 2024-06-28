@@ -1,11 +1,11 @@
-const createLoginDb = (tableName)=>{
-const database = require("sqlite3").verbose();
+const createLoginDb = (tableName) => {
+  const database = require("sqlite3").verbose();
   const db = new database.Database("./database/login.db", (err) => {
     console.log("에러 발생 : ", err);
   });
   const createDb = (tableName) => {
     db.run(
-      `CREATE TABLE ${tableName} (id TEXT NOT NULL, cookie INTEGER)`,
+      `CREATE TABLE ${tableName} (id TEXT NOT NULL, cookie INTEGER, state TEXT)`,
       (err) => {
         if (err) {
           console.log("오류 : ", err);
@@ -15,7 +15,7 @@ const database = require("sqlite3").verbose();
       }
     );
   };
-  createDb(tableName)
-}
-
+  createDb(tableName);
+};
+// createLoginDb("login");
 module.exports = createLoginDb;

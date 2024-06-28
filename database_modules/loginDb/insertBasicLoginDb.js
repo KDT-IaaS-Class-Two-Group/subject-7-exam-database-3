@@ -1,17 +1,16 @@
-const insertBasicLoginDb =(tableName)=>{
-
+const insertBasicLoginDb = (tableName) => {
   const database = require("sqlite3").verbose();
-  
-  const db = new database.Database("./database/login.db")
-  
+
+  const db = new database.Database("./database/login.db");
+
   const insertDb = (id) => {
     const insert = db.prepare(`INSERT INTO ${tableName} (id) VALUES (?)`);
     insert.run(id);
-  }
-  
-  const id = ["panda", "alpaca", "penguin", "marmot", "cheetah"]
+  };
+
+  const id = ["panda", "alpaca", "penguin", "marmot", "cheetah"];
   for (let i = 0; i < id.length; i++) {
-    insertDb(id[i])
+    insertDb(id[i]);
   }
-}
-module.exports=insertBasicLoginDb;
+};
+module.exports = insertBasicLoginDb;
