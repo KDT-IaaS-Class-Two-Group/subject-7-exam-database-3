@@ -13,7 +13,7 @@ const getContentType = (url) => {
   try {
     if (url === "/") {
       return "text/html";
-    } else if (url === "/vending.js" || url.includes("/JS")) {
+    } else if (url === "/vending.js" || url.includes("/JS") || url.includes('.js')) {
       return "application/javascript";
     } else if (url.includes("/img")) {
       const ext = url.split('.').pop();
@@ -25,11 +25,14 @@ const getContentType = (url) => {
         return "image/svg+xml";
       }
       return "image/png"; // 기본값으로 PNG
-    } else if (url.includes("/CSS")) {
+    } else if (url.includes("css")) {
       return "text/css";
     } else if (url === "/index.html" || url === "/HTML/index.html") {
       return "text/html";
-    } else {
+    }else if(url.includes('css.map')){
+      return 'application/json'
+    }
+     else {
       return "application/octet-stream"; // 기본값으로 이진 데이터
     }
   } catch (error) {
@@ -39,4 +42,3 @@ const getContentType = (url) => {
 };
 
 module.exports = getContentType;
-  
