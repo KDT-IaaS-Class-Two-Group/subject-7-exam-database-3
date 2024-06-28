@@ -1,15 +1,13 @@
-//#region
 const http = require("http");
 const postMethodHandler = require("./postMethodHandler");
 const getMethodHandler = require("./getMethodHandler");
-//#endregion
 
 /**
- *  * 2024_06_21 배성빈 : server
- *  기본적인 request에 맞는 response를 반환할 수 있도록 연결장치, 중간다리 역할을 수행한다.
+ * 2024_06_21 배성빈 : server
+ * 기본적인 request에 맞는 response를 반환할 수 있도록 연결장치, 중간다리 역할을 수행한다.
  *
- *  !현재까지 진행해둔 작업
- *  GET 요청 처리 : index.html 전송
+ * !현재까지 진행해둔 작업
+ * GET 요청 처리 : index.html 전송
  *
  */
 const serverSet = (port) => {
@@ -30,3 +28,4 @@ const serverSet = (port) => {
 };
 
 module.exports = serverSet;
+

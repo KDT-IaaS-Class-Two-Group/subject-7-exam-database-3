@@ -1,5 +1,6 @@
-const postLoginProcessor = require("./postLoginProcessor");
-const fs = require("fs");
+const path = require("path");
+const sendFile = require("./sendFile");
+
 const postMethodHandler = (req, res) => {
   switch (req.url) {
     case "/login":
@@ -11,11 +12,18 @@ const postMethodHandler = (req, res) => {
         body += data;
       });
       req.on("end", () => {
-        const data = body.json();
+        const data = JSON.parse(body);
         console.log(data);
-        res.writeHead(302, { Location: "./public/HTML/index.html" });
+        const filePath = path.join(__dirname, "..", "public", "HTML", "index.html");
+        const contentType = "text/html";
+        sendFile(filePath, contentType, res);
       });
+      break;
+    default:
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end("Not Found");
       break;
   }
 };
+
 module.exports = postMethodHandler;
