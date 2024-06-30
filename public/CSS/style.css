@@ -224,7 +224,6 @@ main.space-scene {
   width: 2px;
   height: 2px;
   border-radius: 50%;
-  animation: twinkling 2s infinite;
 }
 
 @keyframes twinkling {
@@ -631,4 +630,44 @@ main.space-scene {
     flex: 1 1 auto;
     display: block;
   }
+}
+.coin-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 코인이 클릭 등의 이벤트를 받지 않도록 설정 */
+  z-index: 10000; /* 코인이 다른 요소 위에 나타나도록 설정 */
+  overflow: visible; /* 코인이 잘리지 않도록 overflow를 visible로 설정 */
+}
+
+.coin {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  cursor: grab; /* 드래그 가능하도록 포인터를 변경 */
+  pointer-events: auto; /* 코인이 이벤트를 받도록 설정 */
+}
+
+
+#stars-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  opacity: 0;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 10000;
+}
+
+.star {
+  position: absolute;
+  width: 3vw;
+  height: 3vw;
+}
+.star img {
+  width: 100%;
+  height: 100%;
 }
