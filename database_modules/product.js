@@ -27,3 +27,5 @@ const product = {
     ][("태양에서 수영하기", 5)],
   ],
 };
+
+module.exports = product;
