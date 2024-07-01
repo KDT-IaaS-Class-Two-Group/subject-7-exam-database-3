@@ -1,7 +1,7 @@
-const createLoginDb = (db, tableName) => {
+const createDb = (db, tableName) => {
   return new Promise((resolve, reject) => {
     db.run(
-      `CREATE TABLE ${tableName} (id TEXT NOT NULL, cookie INTEGER, state TEXT)`,
+      `CREATE TABLE ${tableName} (productName TEXT NOT NULL, description TEXT, price INTEGER)`,
       (err) => {
         if (err) {
           reject("오류 : ", err);
@@ -14,4 +14,4 @@ const createLoginDb = (db, tableName) => {
   });
 };
 
-module.exports = createLoginDb;
+module.exports = createDb;

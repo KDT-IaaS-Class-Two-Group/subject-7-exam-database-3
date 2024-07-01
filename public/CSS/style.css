@@ -202,6 +202,7 @@ main.time-scene {
 .cloud2 {
   width: 100px; /* 구름 크기 설정 */
   height: auto;
+  display: none;
 }
 
 main.space-scene {
@@ -546,7 +547,7 @@ main.space-scene {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 750px;
+  width: 1500px;
   height: 300px;
   background-color: lightgreen;
   border-radius: 0px 100% 0px 0px;
@@ -672,7 +673,6 @@ main.space-scene {
   cursor: grab; /* 드래그 가능하도록 포인터를 변경 */
   pointer-events: auto; /* 코인이 이벤트를 받도록 설정 */
 }
-
 
 #stars-container {
   width: 100%;
