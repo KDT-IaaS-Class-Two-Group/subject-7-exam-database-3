@@ -1,4 +1,4 @@
 const createLoginDb = require("./loginDb/createLoginDb");
-const insertBasicLoginDb = require("./loginDb/insertBasicLoginDb");
+const insertBasicLoginDb = require("./loginDb/insertLoginDb");
 // createLoginDb("login");
 // insertBasicLoginDb("login");

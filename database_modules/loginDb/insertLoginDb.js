@@ -1,4 +1,4 @@
-const insertBasicLoginDb = (tableName) => {
+const insertLoginDb = (tableName) => {
   const database = require("sqlite3").verbose();
 
   const db = new database.Database("./database/login.db");
@@ -13,4 +13,4 @@ const insertBasicLoginDb = (tableName) => {
     insertDb(id[i]);
   }
 };
-module.exports = insertBasicLoginDb;
+module.exports = insertLoginDb;
