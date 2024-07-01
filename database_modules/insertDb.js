@@ -5,14 +5,11 @@ const insertDb = (db, tableName) => {
     for (let i = 0; i < 5; i++) {
       const product = products[tableName][i][0];
       const price = products[tableName][i][1];
-      console.log(product, price);
       const insertQuery = `INSERT INTO ${tableName} (productName, price) VALUES (?, ?)`;
 
       db.run(insertQuery, [product, price], (err) => {
         if (err) {
           reject(err); // 에러 발생 시 reject 호출
-          console.log("sd");
-
           return;
         }
         console.log(`데이터 삽입됨: ${product}와 ${price}`);
