@@ -1,10 +1,9 @@
-const product = require("./product");
-const insertDb = (db, tableName, product, price) => {
+const products = require("./product");
+const insertDb = (db, tableName) => {
   return new Promise((resolve, reject) => {
-    const idList = ["panda", "alpaca", "penguin", "marmot", "cheetah"];
-
-    for (let i = 0; i < idList.length; i++) {
-      const id = idList[i];
+    for (let i = 0; i < products.length; i++) {
+      const product = products[tableName][i][0];
+      const price = product[tableName][i][1];
       const insertQuery = `INSERT INTO ${tableName} (product, price) VALUES (?, ?)`;
 
       db.run(insertQuery, [product], [price], (err) => {
