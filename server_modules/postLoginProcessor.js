@@ -1,7 +1,7 @@
 const selectDb = require("../database_modules/loginDb/selectLoginDb");
 const updateLoginDb = require("../database_modules/loginDb/updataLoginDb");
 const crypto = require("crypto");
-const sendFile = require("./sendFile");
+const sendFile = require("./sendFile"); // sendFile 모듈 로드
 const sessions = {};
 
 const postLoginProcessor = (req, res) => {
@@ -22,27 +22,25 @@ const postLoginProcessor = (req, res) => {
           res.end("Database select error");
         } else if (rows.length === 0) {
           console.log("No matching record found for ID:", id);
-          // Create a new ID in the database
-          updateLoginDb("INSERT INTO login (id) VALUES (?)", [id], (err) => {
-            if (err) {
-              console.error("Database insert error:", err);
-              res.writeHead(500, { "Content-Type": "text/plain" });
-              res.end("Database insert error");
-            } else {
-              res.writeHead(200, { "Content-Type": "application/json" });
-              res.end(JSON.stringify({ created: true, id: id }));
-            }
-          });
+          res.writeHead(404, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ loggedIn: false }));
         } else {
-          // Handle existing ID logic here
-          res.writeHead(200, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ loggedIn: true }));
+          const row = rows[0];
+          console.log("Rows from database:", row.id);
+          updateLoginDb("login", "state", "on", "id", id);
+          const sessionId = crypto.randomBytes(16).toString("hex");
+          sessions[sessionId] = row.id;
+          res.writeHead(200, {
+            "Set-Cookie": `sessionId=${sessionId}; HttpOnly;`,
+            "Content-Type": "application/json",
+          });
+          res.end(JSON.stringify({ loggedIn: true, username: row.username }));
         }
       });
     } catch (error) {
-      console.error("Error processing request:", error);
-      res.writeHead(400, { "Content-Type": "text/plain" });
-      res.end("Invalid request");
+      console.error("Error parsing JSON:", error);
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Invalid JSON" }));
     }
   });
 };
