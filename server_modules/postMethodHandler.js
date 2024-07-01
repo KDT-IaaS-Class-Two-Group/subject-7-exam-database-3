@@ -1,4 +1,8 @@
-let coinCount = 0; // 코인 카운트 변수 추가
+const path = require("path");
+const sendFile = require("./sendFile");
+const postLoginProcessor = require("./postLoginProcessor");
+let coinCount = 0; // 총 코인 카운트 변수
+const coinTypeCounts = {}; // 코인 종류별 카운트를 저장할 객체
 
 const postMethodHandler = (req, res) => {
   console.log("Handling POST request for:", req.url);
@@ -42,10 +46,23 @@ const postMethodHandler = (req, res) => {
           try {
             const coinData = JSON.parse(coinBody);
             console.log("Received coin data:", coinData);
-            coinCount++; // 코인 카운트 증가
-            console.log("Total coins inserted:", coinCount);
+
+            // 코인 종류별 카운트 증가
+            const coinType = coinData.data.split('-')[1];
+            if (!coinTypeCounts[coinType]) {
+              coinTypeCounts[coinType] = 0;
+            }
+            coinTypeCounts[coinType]++;
+            coinCount++; // 총 코인 카운트 증가
+
+            // 코인 종류별 누적 카운트 및 총 카운트 출력
+            console.log(`Total coins inserted: ${coinCount}`);
+            Object.keys(coinTypeCounts).forEach(type => {
+              console.log(`${type} coins inserted: ${coinTypeCounts[type]}`);
+            });
+
             res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ coinCount }));
+            res.end(JSON.stringify({ coinCount, coinTypeCounts }));
           } catch (error) {
             console.error("Error parsing JSON:", error);
             res.writeHead(400, { "Content-Type": "application/json" });

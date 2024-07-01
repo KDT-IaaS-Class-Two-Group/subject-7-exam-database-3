@@ -272,7 +272,6 @@ main.space-scene {
   background-color: #fff;
   border: 2px solid black;
   border-radius: 15px;
-  margin-top: 15vh;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   z-index: 2;
@@ -299,9 +298,33 @@ main.space-scene {
   border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 70px;
-  margin-left: 20px;
+  margin-left: 20px; /* Adjusted margin-left to move right */
 }
-
+.can1 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+.can2 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+.can3 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+.can4 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+.can5 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
 .row {
   display: flex;
   justify-content: space-between;
@@ -310,7 +333,6 @@ main.space-scene {
 .can {
   width: 40px;
   height: 50px;
-  background-color: white;
   border-radius: 3px;
   margin: 5px;
   display: flex;

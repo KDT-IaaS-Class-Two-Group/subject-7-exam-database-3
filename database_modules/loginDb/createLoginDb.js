@@ -17,5 +17,5 @@ const createLoginDb = (tableName) => {
   };
   createDb(tableName);
 };
-// createLoginDb("login");
+createLoginDb("login");
 module.exports = createLoginDb;
