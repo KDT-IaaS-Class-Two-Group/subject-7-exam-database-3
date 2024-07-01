@@ -1,6 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
 const createDb = require("./createDb");
 const insertDb = require("./insertDb");
+const products = require("./product");
 
 const db = new sqlite3.Database("./database/product.db", (err) => {
   if (err) {
@@ -12,8 +13,12 @@ const db = new sqlite3.Database("./database/product.db", (err) => {
 
 const productDb = async () => {
   try {
-    await createDb(db, "animal");
-    await insertDb(db, "animal");
+    const tables = Object.keys(products); // 객체의 키값을 배열로 변환
+    for (const tableName of tables) {
+      // for..of 문으로 키값 반복
+      await createDb(db, tableName);
+      await insertDb(db, tableName);
+    }
   } catch (error) {
     console.error("오류 : ", error);
   } finally {
