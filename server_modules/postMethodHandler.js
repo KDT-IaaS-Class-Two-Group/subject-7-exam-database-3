@@ -1,5 +1,7 @@
 const path = require("path");
 const sendFile = require("./sendFile");
+const adminLoginProcessor = require('./postLoginProcessor_Admin');
+const postLoginProcessor = require("./postLoginProcessor");
 
 const postMethodHandler = (req, res) => {
   switch (req.url) {
@@ -18,6 +20,9 @@ const postMethodHandler = (req, res) => {
         const contentType = "text/html";
         sendFile(filePath, contentType, res);
       });
+      break;
+    case "/adminLogin":
+      adminLoginProcessor(req, res);
       break;
     default:
       res.writeHead(404, { "Content-Type": "text/plain" });
