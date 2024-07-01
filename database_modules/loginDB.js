@@ -4,5 +4,5 @@ const db = new database.Database("./database/login.db", (err) => {
 });
 const createLoginDb = require("./loginDb/createLoginDb");
 const insertBasicLoginDb = require("./loginDb/insertLoginDb");
-// createLoginDb("login");
-// insertBasicLoginDb("login");
+createLoginDb(db, "login");
+insertBasicLoginDb(db, "login");
