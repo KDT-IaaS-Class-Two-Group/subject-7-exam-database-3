@@ -18,4 +18,20 @@ const orders = [
   { foreign: "FOREIGN KEY(product) REFERENCES product(product)" }
 ];
 
-module.exports = { product, members, orders };
+const admin = [
+  { name: 'name', type: 'TEXT NOT NULL PRIMARY KEY' },
+  { name: 'pw', type: 'TEXT NOT NULL' },
+  { name: 'auth', type: 'TEXT NOT NULL' }
+];
+const session = [
+  { name: 'id', type: 'TEXT NOT NULL PRIMARY KEY' },
+  { name: 'name', type: 'TEXT NOT NULL' },
+  { name: 'sessionKey', type: 'TEXT NOT NULL' },
+  { name: 'createAT', type: 'INTEGER' },
+  { name: 'expiresAT', type: 'INTEGER' },
+  { name: 'status', type: 'BOOLEAN' },
+  { name: 'level', type: 'INTEGER' },
+  { foreign: "FOREIGN KEY(name) REFERENCES admin(name)" }
+];
+
+module.exports = { product, members, orders, admin, session};
