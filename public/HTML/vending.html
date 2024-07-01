@@ -1,151 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vending Machine</title>
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/style.css" />
     <style>
-        #stars-container {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            opacity: 0;
-            justify-content: space-between;
-            position: absolute;
-            z-index: 10000;
-        }
+      #stars-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        opacity: 0;
+        justify-content: space-between;
+        position: absolute;
+        z-index: 10000;
+      }
 
-        .star {
-            position: absolute;
-            width: 3vw;
-            height: 3vw;
-            cursor: grab;
-        }
+      .star {
+        position: absolute;
+        width: 3vw;
+        height: 3vw;
+        cursor: grab;
+      }
 
-        .star img {
-            width: 100%;
-            height: 100%;
-        }
-
-        
+      .star img {
+        width: 100%;
+        height: 100%;
+      }
     </style>
-</head>
-<body>
-<main>
-    <div class="image-container">
-        <img class="title" src="/img/title.png" alt="title">
-        <img class="sun" src="/img/sun.png" alt="sun">
-    </div>
-    <div class="vending-container">
+  </head>
+  <body>
+    <main>
+      <div class="image-container">
+        <img class="title" src="/img/title.png" alt="title" />
+        <img class="sun" src="/img/sun.png" alt="sun" />
+      </div>
+      <div class="vending-container">
         <div class="lamp-container left-lamps">
-            <div class="radiationlamp">
-                <div class="radiationlamplight"></div>
-            </div>
-            <div class="animallamp">
-                <div class="animallamplight"></div>
-            </div>
-            <div class="crimelamp">
-                <div class="crimelamplight"></div>
-            </div>
+          <div class="radiationlamp">
+            <div class="radiationlamplight"></div>
+          </div>
+          <div class="animallamp">
+            <div class="animallamplight"></div>
+          </div>
+          <div class="crimelamp">
+            <div class="crimelamplight"></div>
+          </div>
         </div>
         <div class="vending-machine">
-            <div class="machine">
-                <div class="products">
-                    <!-- 25개의 캔 배치 -->
-                    <div class="row">
-                      <div class="can"><span class="label">
-                        <img class="can1" src="/img/can1.png" alt="">1COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can1" src="/img/can1.png" alt="">2COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can1" src="/img/can1.png" alt="">3COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can1" src="/img/can1.png" alt="">4COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can1" src="/img/can1.png" alt="">5COIN</span></div>
-                    </div>
-                    <div class="row">
-                      <div class="can"><span class="label">
-                        <img class="can2" src="/img/can2.png" alt="">6COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can2" src="/img/can2.png" alt="">7COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can2" src="/img/can2.png" alt="">8COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can2" src="/img/can2.png" alt="">9COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can2" src="/img/can2.png" alt="">1COIN</span></div>
-                    </div>
-                    <div class="row">
-                      <div class="can"><span class="label">
-                        <img class="can3" src="/img/can3.png" alt="">1COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can3" src="/img/can3.png" alt="">2COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can3" src="/img/can3.png" alt="">3COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can3" src="/img/can3.png" alt="">4COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can3" src="/img/can3.png" alt="">5COIN</span></div>
-                    </div>
-                    <div class="row">
-                      <div class="can"><span class="label">
-                        <img class="can4" src="/img/can4.png" alt="">6COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can4" src="/img/can4.png" alt="">7COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can4" src="/img/can4.png" alt="">8COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can4" src="/img/can4.png" alt="">9COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can4" src="/img/can4.png" alt="">2COIN</span></div>
-                    </div>
-                    <div class="row">
-                      <div class="can"><span class="label">
-                        <img class="can5" src="/img/can5.png" alt="">1COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can5" src="/img/can5.png" alt="">2COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can5" src="/img/can5.png" alt="">3COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can5" src="/img/can5.png" alt="">4COIN</span></div>
-                      <div class="can"><span class="label">
-                        <img class="can5" src="/img/can5.png" alt="">5COIN</span></div>
-                    </div>
-                  </div>
-                <div class="coin-slot" id="coin-slot">
-                    <div class="screen" id="coin-display">0 COIN</div>
-                    <div class="slot" id="drop-zone"></div>
-                    <div class="coin-label">Insert Coin</div>
+          <div class="machine">
+            <div class="products">
+              <!-- 25개의 캔 배치 -->
+              <div class="row">
+                <div class="can">
+                  <span class="label">
+                    <img class="can1" src="/img/can1.png" alt="" />1COIN</span
+                  >
                 </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can1" src="/img/can1.png" alt="" />2COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can1" src="/img/can1.png" alt="" />3COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can1" src="/img/can1.png" alt="" />4COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can1" src="/img/can1.png" alt="" />5COIN</span
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="can">
+                  <span class="label">
+                    <img class="can2" src="/img/can2.png" alt="" />6COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can2" src="/img/can2.png" alt="" />7COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can2" src="/img/can2.png" alt="" />8COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can2" src="/img/can2.png" alt="" />9COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can2" src="/img/can2.png" alt="" />1COIN</span
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="can">
+                  <span class="label">
+                    <img class="can3" src="/img/can3.png" alt="" />1COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can3" src="/img/can3.png" alt="" />2COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can3" src="/img/can3.png" alt="" />3COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can3" src="/img/can3.png" alt="" />4COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can3" src="/img/can3.png" alt="" />5COIN</span
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="can">
+                  <span class="label">
+                    <img class="can4" src="/img/can4.png" alt="" />6COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can4" src="/img/can4.png" alt="" />7COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can4" src="/img/can4.png" alt="" />8COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can4" src="/img/can4.png" alt="" />9COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can4" src="/img/can4.png" alt="" />2COIN</span
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="can">
+                  <span class="label">
+                    <img class="can5" src="/img/can5.png" alt="" />1COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can5" src="/img/can5.png" alt="" />2COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can5" src="/img/can5.png" alt="" />3COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can5" src="/img/can5.png" alt="" />4COIN</span
+                  >
+                </div>
+                <div class="can">
+                  <span class="label">
+                    <img class="can5" src="/img/can5.png" alt="" />5COIN</span
+                  >
+                </div>
+              </div>
             </div>
-            <!-- 음료수가 나오는 영역 -->
-            <div class="output">
-                <div class="output-label">Drink Here</div>
+            <div class="coin-slot" id="coin-slot">
+              <div class="screen" id="coin-display">0 COIN</div>
+              <div class="slot" id="drop-zone"></div>
+              <div class="coin-label">Insert Coin</div>
             </div>
-            <div class="legs">
-                <div class="leg"></div>
-                <div class="leg"></div>
-                <div class="leg"></div>
-            </div>
+          </div>
+          <!-- 음료수가 나오는 영역 -->
+          <div class="output">
+            <div class="output-label">Drink Here</div>
+          </div>
+          <div class="legs">
+            <div class="leg"></div>
+            <div class="leg"></div>
+            <div class="leg"></div>
+          </div>
         </div>
         <div class="lamp-container right-lamps">
-            <div class="timelamp">
-                <div class="timelamplight"></div>
-            </div>
-            <div class="spacelamp">
-                <div class="spacelamplight"></div>
-            </div>
+          <div class="timelamp">
+            <div class="timelamplight"></div>
+          </div>
+          <div class="spacelamp">
+            <div class="spacelamplight"></div>
+          </div>
         </div>
-    </div>
-    <div id="stars-container"></div>
-</main>
-<div id="coin-slot"></div>
-<div id="coin-count">0</div>
-<div class="coin" draggable="true">Coin</div>
-<div class="coin" draggable="true">Coin</div>
-<div class="coin" draggable="true">Coin</div>
-<script src="../JS/vending.js"></script>
-</body>
+      </div>
+      <div id="stars-container"></div>
+    </main>
+    <div id="coin-slot"></div>
+    <div id="coin-count"></div>
+    <div class="coin" draggable="true">Coin</div>
+    <div class="coin" draggable="true">Coin</div>
+    <div class="coin" draggable="true">Coin</div>
+    <script src="../JS/vending.js"></script>
+  </body>
 </html>
