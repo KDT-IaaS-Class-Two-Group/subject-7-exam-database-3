@@ -1,4 +1,4 @@
-const products = require("./product");
+const products = require("./productData");
 
 const insertDb = (db, tableName) => {
   return new Promise((resolve, reject) => {
