@@ -1,4 +1,5 @@
 const checkAuth = require('./checkAuth.js');
+const SessionManager = require('./sessionManager.js')
 
 const adminLoginProcessor = (req, res) => {
   let body = "";
@@ -8,7 +9,15 @@ const adminLoginProcessor = (req, res) => {
 
   req.on("end", async () => {
     const loginData = await JSON.parse(body);
-    checkAuth(loginData)
+    const isAuthCheck = checkAuth(loginData);
+    if (isAuthCheck) {
+      const sessionManager = new SessionManager();
+      sessionManager.insertSessionTable();
+      sessionManager.processRequestAdminLogin(res);
+    } else {
+      res.writeHead(500, { "Content-Type": "text/plain" });
+      res.end('error');
+    }
   });
 };
 
