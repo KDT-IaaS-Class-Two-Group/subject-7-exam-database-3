@@ -1,18 +1,14 @@
-const AdminManager = require('../database_modules/admin_modules/adminManager.js')
-/**
- * 
- * @param {*} req : 
- * @param {*} res 
- */
+const checkAuth = require('./checkAuth.js');
+
 const adminLoginProcessor = (req, res) => {
   let body = "";
-  const adminManager = new AdminManager();
   req.on("data", (data) => {
     body += data;
   });
-  req.on("end", () => {
-    const loginData = JSON.parse(body);
-    
+
+  req.on("end", async () => {
+    const loginData = await JSON.parse(body);
+    checkAuth(loginData)
   });
 };
 
