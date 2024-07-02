@@ -1,3 +1,5 @@
+const path = require("path");
+const sendFile = require("./sendFile");
 const Gologin = (req, res) => {
   let body = "";
   req.on("data", (data) => {
