@@ -12,14 +12,7 @@ const getMethodHandler = (req, res) => {
   let fileName;
   switch (true) {
     case url === "/":
-<<<<<<< HEAD
       sendFile(path.join(htmlPath, "manager.html"), contentType, res);
-=======
-      if (req.headers.cookie) {
-        console.log("Cookie:", req.headers.cookie);
-      }
-      sendFile(path.join(htmlPath, "vending.html"), contentType, res);
->>>>>>> 92f684acefaeaf71262ef746a9f38f673441bb02
       break;
 
     case url === "/HTML/index.html":

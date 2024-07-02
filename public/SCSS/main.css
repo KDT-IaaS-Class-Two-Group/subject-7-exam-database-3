@@ -9,19 +9,26 @@ body {
   display: grid;
   grid-template-rows: 1fr 3fr;
   height: 100vh;
+  overflow: hidden;
   grid-template-areas: "top" "bot";
+}
+
+input:focus {
+  outline: none;
 }
 
 header {
   grid-area: top;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
 header > :nth-child(1) {
   display: flex;
   justify-content: center;
+  align-items: center;
   align-items: baseline;
   position: relative;
 }
@@ -43,4 +50,60 @@ header > :nth-child(1) > :nth-child(2) {
 
 main {
   grid-area: bot;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+main > :nth-child(1) {
+  width: 60vw;
+  height: 50vh;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: -6px 8px 3px 3px #555555;
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+}
+main > :nth-child(1) > :nth-child(1) {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+main > :nth-child(1) .login-view > label {
+  margin: 20px;
+}
+main > :nth-child(1) .login-view .login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+main > :nth-child(1) .login-view .login > input {
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-bottom: solid;
+  text-align: center;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: url("../../manager_source/star.png") no-repeat center center;
+  background-size: contain;
+  opacity: 0;
+  animation: blink 2s linear forwards;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }/*# sourceMappingURL=main.css.map */

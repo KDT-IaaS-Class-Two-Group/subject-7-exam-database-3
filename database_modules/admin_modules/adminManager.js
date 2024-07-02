@@ -1,4 +1,4 @@
-const tableObject = require('../tableScheme.js');
+const tableObject = require('../pendingDb/tableScheme.js');
 
 class AdminManager {
   constructor(createTable, selectTable) {
