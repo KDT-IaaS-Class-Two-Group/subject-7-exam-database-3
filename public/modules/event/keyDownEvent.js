@@ -26,8 +26,7 @@ export class EnterEvent {
             if (!response.ok) {
               throw new Error('실패');
             }
-
-            const data = await response.json();
+            
 
             // 성공 시 페이지 이동 등 추가 로직
             // window.location.href = '/dashboard'; // 예: 대시보드 페이지로 이동
