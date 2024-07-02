@@ -1,7 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
-const createDb = require("./productDb/createDb");
-const insertDb = require("./productDb/insertDb");
-const products = require("./productDb/productData");
+const createDb = require("./createDb");
+const insertDb = require("./insertDb");
+const products = require("./productData");
 
 const productDb = () => {
   return new Promise((resolve, reject) => {

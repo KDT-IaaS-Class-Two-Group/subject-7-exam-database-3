@@ -1,6 +1,6 @@
-const loginDb = require("./loginDB.js");
-const productDb = require("./productDb.js");
-const purchaseDb = require("./purchaseDB.js");
+const loginDb = require("./loginDb/loginDB.js");
+const productDb = require("./productDb/productDB.js");
+const purchaseDb = require("./purchaseDb/purchaseDB.js");
 
 const setupDatabases = async () => {
   try {

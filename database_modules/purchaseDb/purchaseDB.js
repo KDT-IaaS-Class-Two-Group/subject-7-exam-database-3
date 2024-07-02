@@ -1,20 +1,18 @@
 const sqlite3 = require("sqlite3").verbose();
-const createLoginDb = require("./loginDb/createLoginDb");
-const insertLoginDb = require("./loginDb/insertLoginDb");
+const purchaseCreate = require("./purchaseCreate");
 
-const loginDb = () => {
+const purchaseDb = () => {
   return new Promise((resolve, reject) => {
-    const db = new sqlite3.Database("./database/login.db", async (err) => {
+    const db = new sqlite3.Database("./database/purchase.db", async (err) => {
       if (err) {
-        console.error("login.db 에러 발생 : ", err);
+        console.error("purchase.db 에러 발생 : ", err);
         reject(err);
         return;
       }
-      console.log("login.db 데이터베이스 연결됨");
+      console.log("purchase.db 데이터베이스 연결됨");
 
       try {
-        await createLoginDb(db, "login");
-        await insertLoginDb(db, "login");
+        await purchaseCreate(db, "purchase");
         resolve();
       } catch (error) {
         console.error("오류 : ", error);
@@ -30,4 +28,4 @@ const loginDb = () => {
   });
 };
 
-module.exports = loginDb;
+module.exports = purchaseDb;
