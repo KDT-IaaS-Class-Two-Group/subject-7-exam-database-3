@@ -1,10 +1,10 @@
 const tableObject = require('../tableScheme.js');
 
 class AdminManager {
-  constructor(tableName, createTable, userDataSelect) {
+  constructor(createTable, selectTable) {
     this.create = createTable;
-    this.select = userDataSelect;
-    this.tableArr = tableName;
+    this.select = selectTable;
+    this.tableArr = ['admin', 'session']
   };
 
   createTable() {
@@ -13,12 +13,8 @@ class AdminManager {
     });
   }
 
-  checkData(object) {
-    try {
-      return this.select.select('admin', object);
-    } catch (error) {
-      console.error(error);
-    }
+  async checkData(object) {
+    return this.select.selectAdminTable(object);
   }
 }
 
