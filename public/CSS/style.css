@@ -6,7 +6,7 @@ html {
   width: 100vw;
   height: 100vh;
   font-family: Arial, sans-serif;
-  overflow: visible;
+  overflow: hidden; /* overflow를 hidden으로 설정하여 스크롤바를 숨김 */
 }
 
 body {
@@ -16,12 +16,159 @@ body {
   justify-content: center;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+main.radiation-scene {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+main.animal-scene {
+  margin: 0;
+  position: relative;
+  background: repeating-linear-gradient(
+    180deg,
+    #d0e3ff,
+    #d0e3ff 15px,
+    white 10px,
+    white 30px
+  );
+  background-attachment: fixed;
+}
+
+main.background-image {
+  background: repeating-linear-gradient(
+    135deg,
+    #fbff1a,
+    #fbff1a 50px,
+    rgb(0, 0, 0) 50px,
+    rgb(0, 0, 0) 100px
+  );
+  background-attachment: fixed;
+}
+
+main.crime-scene {
+  background-color: rgb(110, 110, 110);
+  background-image: linear-gradient(335deg, #000000 23px, transparent 23px),
+    linear-gradient(155deg, #000000 23px, transparent 23px),
+    linear-gradient(335deg, #000000 23px, transparent 23px),
+    linear-gradient(155deg, #000000 23px, transparent 23px);
+  background-size: 58px 58px;
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+}
+
+main.animal-background {
+  background: repeating-linear-gradient(
+    180deg,
+    #d0e3ff,
+    #d0e3ff 15px,
+    white 10px,
+    white 30px
+  );
+  background-attachment: fixed;
+}
+
+main.time-scene {
+  background-color: black;
+  background-image: none; /* 배경 이미지를 none으로 설정하여 span 요소 사용 */
+  position: relative; /* 자식 요소들의 위치를 조정할 수 있도록 relative로 설정 */
+  z-index: 1;
+}
+
+#binary-container {
+  position: absolute; /* 자판기와 가로등 뒤에 배경을 놓기 위해 absolute로 설정 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1; /* 배경 텍스트를 메인 콘텐츠 뒤로 보내기 위해 z-index를 -1로 설정 */
+}
+
+.police-tape {
+  background-color: #ffcd18;
+  background: linear-gradient(
+    180deg,
+    lighten(#b79a2f, 20%) 0%,
+    #b79a2f 5%,
+    #b79a2f 90%,
+    lighten(#b79a2f, 5%) 95%,
+    darken(#b79a2f, 50%) 100%
+  );
+  padding: 0.125em;
+  font-size: 3em;
+  text-align: center;
+  white-space: nowrap;
+  position: absolute;
+  z-index: 2; /* Police tape in front of blood stain */
+}
+
+.police-tape--1 {
+  position: absolute;
+  z-index: 0;
+  transform: rotate(10deg);
+  top: 40%;
+  left: -5%;
+  right: -5%;
+  margin-top: 0;
+}
+
+.police-tape--2 {
+  position: absolute;
+  z-index: 0;
+  transform: rotate(-8deg);
+  top: 50%;
+  left: -5%;
+  right: -5%;
+}
+
+.blood-stain2 {
+  top: 25%;
+  opacity: 0.8;
+  position: absolute;
+  right: 50%;
+}
+
+.blood-stain2 > img {
+  width: 600px;
+  height: 600px;
+}
+
+.blood-stain {
+  position: absolute;
+  top: 20%;
+  left: 70%;
+  background: url("../../img/bloodstain.png") no-repeat;
+  background-size: contain;
+  z-index: 0;
+  opacity: 0.8;
+  clip-path: polygon(10% 10%, 90% 10%, 90% 90%, 10% 90%);
+  transform: rotate(310deg);
+}
+.blood-stain > img {
+  width: 950px;
+  height: 950px;
+}
+
 .image-container {
   min-height: 19vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: relative;
   z-index: 2;
 }
 
@@ -40,26 +187,82 @@ body {
   right: 3vw;
 }
 
-/* Main styles for the vending machine */
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+/* 구름 스타일 추가 */
+.cloud-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.cloud1,
+.cloud2 {
+  width: 100px; /* 구름 크기 설정 */
+  height: auto;
+  display: none;
+}
+
+main.space-scene {
+  position: relative;
+  z-index: 0;
+  background-color: #111;
+}
+
+.shooting-stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Ensure stars are behind other content */
+}
+
+.star {
+  position: absolute;
   background-color: #fff;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+}
+
+@keyframes twinkling {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(100vw, -100vh, 0) scale(0.5);
+    opacity: 0;
+  }
 }
 
 .vending-container {
   display: flex;
   justify-content: space-evenly;
-  align-items: flex-end; /* Align items to the bottom */
+  align-items: flex-end;
   width: 100%;
   flex-grow: 1;
   position: relative;
   padding-bottom: 10vh;
   box-shadow: -80px 0px 0px black;
+  z-index: 2;
 }
 
 .vending-machine {
@@ -72,8 +275,8 @@ main {
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  z-index: 1;
-  position: relative; /* Ensure the legs are positioned correctly */
+  z-index: 2;
+  position: relative;
   box-shadow: -80px 0px 0px black;
 }
 
@@ -94,11 +297,35 @@ main {
   background-color: black;
   padding: 10px;
   border-radius: 10px;
-  margin-top: 30px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 70px;
   margin-left: 20px; /* Adjusted margin-left to move right */
 }
-
+.can1 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+.can2 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+.can3 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+.can4 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+.can5 {
+  width: 2vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
 .row {
   display: flex;
   justify-content: space-between;
@@ -107,7 +334,6 @@ main {
 .can {
   width: 40px;
   height: 50px;
-  background-color: white;
   border-radius: 3px;
   margin: 5px;
   display: flex;
@@ -123,7 +349,6 @@ main {
   color: white;
 }
 
-/* Coin slot styles */
 .coin-slot {
   display: flex;
   flex-direction: column;
@@ -158,7 +383,6 @@ main {
   text-align: center;
 }
 
-/* Output area styles */
 .output {
   width: 70%;
   background-color: #fff;
@@ -183,7 +407,7 @@ main {
   justify-content: space-around;
   width: 100%;
   position: absolute;
-  bottom: -10px; /* 위치 조정 */
+  bottom: -10px;
 }
 
 .leg {
@@ -196,10 +420,12 @@ main {
 .lamp-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end; /* Align lamps to the bottom */
+  justify-content: flex-end;
   align-items: center;
   margin: 0 50px;
   gap: 3vw;
+  position: relative;
+  z-index: 3;
 }
 
 .left-lamps {
@@ -212,7 +438,7 @@ main {
 }
 
 .lamp-container img {
-  width: 150px; /* Adjust size as needed */
+  width: 150px;
   height: auto;
   margin: 8px 0;
   transition: transform 0.3s ease-in-out;
@@ -223,93 +449,129 @@ main {
 }
 
 .animallamp {
-  background-image: url(/img/animallamp_non.png);
+  background-image: url(../../img/animallamp_non.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 6vw;
   height: 42vh;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
+
 .animallamplight {
   display: none;
-  background-image: url(/img/animallamp_light.png);
+  background-image: url(../../img/animallamp_light.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 6vw;
   height: 42vh;
-  display: none;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
+
 .timelamp {
-  background-image: url(/img/timelamp_none.png);
+  background-image: url(../../img/timelamp_none.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 6vw;
   height: 37vh;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
+
 .timelamplight {
-  background-image: url(/img/timelamp_light.png);
+  background-image: url(../../img/timelamp_light.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 6vw;
   height: 37vh;
   display: none;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
 
 .radiationlamp {
-  background-image: url(/img/radiationlamp_non.png);
+  background-image: url(../../img/radiationlamp_non.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 6vw;
   height: 41vh;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
+
 .radiationlamplight {
-  background-image: url(/img/radiaitonlamp_light.png);
+  background-image: url(../../img/radiaitonlamp_light.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 6vw;
   height: 41vh;
   display: none;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
 
 .spacelamp {
-  background-image: url(/img/spacelamp_non.png);
+  background-image: url(../../img/spacelamp_non.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 5vw;
   height: 40vh;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
+
 .spacelamplight {
-  background-image: url(/img/spacelamp_light.png);
+  background-image: url(../../img/spacelamp_light.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 5vw;
   height: 40vh;
   display: none;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
 
 .crimelamp {
-  background-image: url(/img/crimelamp_non.png);
+  background-image: url(../../img/crimelamp_non.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 6vw;
   height: 40vh;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
+
 .crimelamplight {
-  background-image: url(/img/crimelamp_light.png);
+  background-image: url(../../img/crimelamp_light.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 6vw;
   height: 40vh;
   display: none;
+  z-index: 4; /* 가로등이 풀 앞에 나타나도록 z-index 설정 */
 }
 
-/* Media query for tablets and smaller devices */
+.grass1 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1500px;
+  height: 300px;
+  background-color: lightgreen;
+  border-radius: 0px 100% 0px 0px;
+  z-index: 1;
+}
+
+.grass2 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 680px;
+  height: 300px;
+  background-color: lightgreen;
+  border-radius: 100% 0px 0px 0px;
+  z-index: 1;
+}
+
 @media (max-width: 1279px) {
   .vending-container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 100%; /* Ensure the container takes the full height */
+    height: 100%;
   }
 
   .vending-machine {
@@ -332,14 +594,13 @@ main {
   }
 }
 
-/* Media query for mobile phones */
 @media (max-width: 480px) {
   .vending-container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 100%; /* Ensure the container takes the full height */
+    height: 100%;
   }
 
   .vending-machine {
@@ -353,7 +614,7 @@ main {
     width: 100%;
     justify-content: space-around;
     margin: 1vw 0;
-    height: auto; /* Ensure the lamp container fits within the height */
+    height: auto;
   }
 
   .lamp-container img,
@@ -363,19 +624,19 @@ main {
   .lamp-container .animallamp,
   .lamp-container .crimelamp {
     width: 15vw;
-    height: 25vh; /* Adjusted height to fit within the viewport */
+    height: 25vh;
     margin: 0 0.5vw;
-    display: block; /* Ensure images are always displayed */
+    display: block;
   }
 
   .left-lamps,
   .right-lamps {
     justify-content: center;
-    display: flex; /* Ensure right-lamps are displayed */
+    display: flex;
   }
 
   .right-lamps {
-    display: flex !important; /* Ensure right-lamps are displayed */
+    display: flex !important;
   }
 }
 
@@ -385,11 +646,50 @@ main {
   .animallamp,
   .radiationlamp,
   .crimelamp {
-    display: block !important; /* Ensure images are always displayed */
+    display: block !important;
   }
 
   img {
-    flex: 1 1 auto; /* Ensure images are always displayed */
+    flex: 1 1 auto;
     display: block;
   }
+}
+.coin-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 코인이 클릭 등의 이벤트를 받지 않도록 설정 */
+  z-index: 10000; /* 코인이 다른 요소 위에 나타나도록 설정 */
+  overflow: visible; /* 코인이 잘리지 않도록 overflow를 visible로 설정 */
+}
+
+.coin {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  cursor: grab; /* 드래그 가능하도록 포인터를 변경 */
+  pointer-events: auto; /* 코인이 이벤트를 받도록 설정 */
+}
+
+#stars-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  opacity: 0;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 10000;
+}
+
+.star {
+  position: absolute;
+  width: 3vw;
+  height: 3vw;
+}
+.star img {
+  width: 100%;
+  height: 100%;
 }
