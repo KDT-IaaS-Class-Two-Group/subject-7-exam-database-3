@@ -12,28 +12,12 @@ body {
   width: 100vw;
   height: 100vh;
 }
-#banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-/* #banner > div > img {
-  width: 30%;
-  height: 90%;
-} */
-/* #innerBanner {
-  width: 30%;
-} */
-
-/* #banner > div:nth-child(2) {
-  position: absolute;
-  margin-right: 2vw;
-} */
 
 #banner {
   padding-top: 0.85vh;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   height: auto;
   transition: transform 0.3s ease-in-out;
 }
