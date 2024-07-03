@@ -3,20 +3,32 @@ const two = document.getElementById("two");
 const three = document.getElementById("three");
 const four = document.getElementById("four");
 const five = document.getElementById("five");
-let clicked = false;
-one.addEventListener("click", (e) => {
-  if (!clicked) {
-    const message = document.createElement("div");
-    message.className = "message";
-    message.innerHTML = "I like <strong>panda</strong>";
-    one.appendChild(message);
-  } else {
-    const existingMessage = one.querySelector(".message");
-    if (existingMessage) {
-      one.removeChild(existingMessage); // 여기서 실제 DOM에 추가된 요소를 제거합니다.
+const buttons = [
+  { id: "one", message: "I like <strong>panda</strong>" },
+  { id: "two", message: "I like <strong>cheeta</strong>" },
+  { id: "three", message: "I like <strong>marmet</strong>" },
+  { id: "four", message: "I like <strong>penguin</strong>" },
+  { id: "five", message: "I like <strong>alpaca</strong>" },
+];
+
+buttons.forEach((button) => {
+  const element = document.getElementById(button.id);
+  let clicked = false;
+
+  element.addEventListener("click", () => {
+    if (!clicked) {
+      const message = document.createElement("div");
+      message.className = "message";
+      message.innerHTML = button.message;
+      element.appendChild(message);
+    } else {
+      const existingMessage = element.querySelector(".message");
+      if (existingMessage) {
+        element.removeChild(existingMessage);
+      }
     }
-  }
-  clicked = !clicked; // 클릭 상태를 토글합니다.
+    clicked = !clicked; // 클릭 상태를 토글합니다.
+  });
 });
 
 document.getElementById("signup").addEventListener("click", function (event) {
