@@ -1,3 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
 #root {
   display: flex;
   flex-direction: column;
@@ -23,6 +31,7 @@
 } */
 
 #banner {
+  padding-top: 0.85vh;
   display: flex;
   align-items: center;
   height: auto;
@@ -45,4 +54,30 @@
 
 #logoSun > img {
   width: 9.5vw;
+}
+#main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5vw 0vw;
+}
+#box {
+  border: 1px solid black;
+  box-shadow: -20px 16px 0 -3px rgb(0, 0, 0);
+  width: 60vw;
+  height: 45vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+}
+#bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 5.5vh;
+}
+#bottom > div > img {
+  width: 11.5vw;
 }
