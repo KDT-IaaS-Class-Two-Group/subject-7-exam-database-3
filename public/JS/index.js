@@ -3,6 +3,7 @@ const two = document.getElementById("two");
 const three = document.getElementById("three");
 const four = document.getElementById("four");
 const five = document.getElementById("five");
+const logosun = document.getElementById("logoSun");
 const buttons = [
   { id: "one", message: "I like <strong>panda</strong>" },
   { id: "two", message: "I like <strong>cheeta</strong>" },
@@ -63,4 +64,9 @@ document.getElementById("signup").addEventListener("click", function (event) {
       console.error("Error:", error);
       alert("입력한 아이디가 데이터 베이스에 존재하지 않습니다.");
     });
+});
+logosun.addEventListener("click", (event) => {
+  event.preventDefault();
+  window.location.href = "/"; // 홈 화면으로 이동
+  console.log(1);
 });
