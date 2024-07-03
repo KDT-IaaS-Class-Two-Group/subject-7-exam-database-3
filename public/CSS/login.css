@@ -1,0 +1,48 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+#banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+/* #banner > div > img {
+  width: 30%;
+  height: 90%;
+} */
+/* #innerBanner {
+  width: 30%;
+} */
+
+/* #banner > div:nth-child(2) {
+  position: absolute;
+  margin-right: 2vw;
+} */
+
+#banner {
+  display: flex;
+  align-items: center;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+#banner > div:nth-child(2) {
+  max-width: 8vw;
+  height: auto;
+  margin-left: 70vw;
+  transition: transform 0.3s ease-in-out;
+  position: absolute;
+  right: 3vw;
+}
+
+#innerBanner > img {
+  width: 23vw;
+  padding: 0.7vw 0vw;
+}
+
+#logoSun > img {
+  width: 9.5vw;
+}
