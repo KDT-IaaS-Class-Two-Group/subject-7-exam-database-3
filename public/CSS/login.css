@@ -77,7 +77,34 @@ body {
   justify-content: space-evenly;
   align-items: center;
   padding-top: 5.5vh;
+  position: relative;
 }
 #bottom > div > img {
   width: 11.5vw;
+}
+.message {
+  color: black;
+  position: absolute;
+  top: -2.5vw;
+  background-color: rgba(128, 128, 128, 0.514);
+  box-shadow: -5px 7px 0px -3px rgb(0, 0, 0);
+  width: 12vw;
+  height: 3vw;
+  line-height: 3vw;
+  text-align: center;
+  border-radius: 15px;
+}
+.message::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-top-color: #000000;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -10px;
+  margin-bottom: -20px;
 }

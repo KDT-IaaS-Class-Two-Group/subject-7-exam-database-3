@@ -1,3 +1,24 @@
+const one = document.getElementById("one");
+const two = document.getElementById("two");
+const three = document.getElementById("three");
+const four = document.getElementById("four");
+const five = document.getElementById("five");
+let clicked = false;
+one.addEventListener("click", (e) => {
+  if (!clicked) {
+    const message = document.createElement("div");
+    message.className = "message";
+    message.innerHTML = "I like <strong>panda</strong>";
+    one.appendChild(message);
+  } else {
+    const existingMessage = one.querySelector(".message");
+    if (existingMessage) {
+      one.removeChild(existingMessage); // 여기서 실제 DOM에 추가된 요소를 제거합니다.
+    }
+  }
+  clicked = !clicked; // 클릭 상태를 토글합니다.
+});
+
 document.getElementById("signup").addEventListener("click", function (event) {
   event.preventDefault(); // 기본 폼 제출 동작을 막습니다.
   const id = document.getElementById("id").value;
