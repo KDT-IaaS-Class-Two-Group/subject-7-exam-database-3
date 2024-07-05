@@ -1,24 +1,11 @@
 # 주토피아
 
 # 팀원 소개
-- [김보미](https://github.com/zoeznm) - **디자인**담당
-  - **데이터베이스 설계** 및 **쿼리 최적화** 작업.
-  - **RESTful API** 개발 및 **기능 구현** 담당.
-- [김수현](https://github.com/dalramjwi) - 팀 리더 및 **서버 사이드 개발** 담당
-  - **서버 설계** 및 **API 개발**을 주도하며 프로젝트의 방향성을 설정.
-  - **GitHub 관리** 및 **버전 관리** 업무를 담당.
-- [신지윤](https://github.com/yun-21) - **클라이언트 사이드 개발** 및 **디자인** 담당
-  - **프론트엔드 개발** 및 **UI/UX 디자인**을 담당.
-  - **클라이언트-서버 연동**과 **디자인 시안** 구현.
-- [배성](https://github.com/naviadev) - **데이터베이스 설계** 및 **API 개발** 담당
-  - **데이터베이스 설계** 및 **쿼리 최적화** 작업.
-  - **RESTful API** 개발 및 **기능 구현** 담당.
-- [이재영](https://github.com/IJAEYEONG) - **데이터베이스 설계** 및 **API 개발** 담당
-  - **데이터베이스 설계** 및 **쿼리 최적화** 작업.
-  - **RESTful API** 개발 및 **기능 구현** 담당.
-
-## GitHub Repository
-- [자판기 프로젝트 GitHub Repository](https://github.com/dalramjwi/vending-machine-project)
+- [김보미](https://github.com/zoeznm)
+- [김수현](https://github.com/dalramjwi) 
+- [신지윤](https://github.com/yun-21) 
+- [배성](https://github.com/naviadev) 
+- [이재영](https://github.com/IJAEYEONG)
 
 # 팀소개
 **각자 다른 개성과 재능을 가진 팀원들이 한데 모여 팀 프로젝트를 진행한다는 점에서, 다양한 동물들이 모여 있는 동물원을 떠올렸다.  
