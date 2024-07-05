@@ -1,4 +1,4 @@
-const templateView = () => {
+export const templateView = () => {
   return `<div class="container">
               <div class="input-container">
                 <input type="text" placeholder="Enter text here">

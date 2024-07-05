@@ -1,4 +1,4 @@
-const contentView = (productName, price, stock) => {
+export const contentView = (productName, price, stock) => {
   return `    <div class="content">
                   <span>상품명 : ${productName}</span>
                   <input type="text" placeholder="Enter amount">
