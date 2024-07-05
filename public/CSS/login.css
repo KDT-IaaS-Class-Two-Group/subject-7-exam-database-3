@@ -92,3 +92,21 @@ body {
   margin-left: -10px;
   margin-bottom: -20px;
 }
+
+#id {
+  width: 305px;
+  height: 74px;
+  font-size: 30px;
+  text-align: center;
+}
+
+#signup {
+  width: 78px;
+  height: 77px;
+  margin-left: 20px;
+}
+
+#innerBox {
+  display: flex;
+  align-items: center;
+}
