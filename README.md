@@ -4,7 +4,7 @@
 - [김보미](https://github.com/zoeznm)
 - [김수현](https://github.com/dalramjwi) 
 - [신지윤](https://github.com/yun-21) 
-- [배성](https://github.com/naviadev) 
+- [배성빈](https://github.com/naviadev) 
 - [이재영](https://github.com/IJAEYEONG)
 
 # 팀소개
