@@ -1,24 +1,19 @@
-import { requestValidation } from "../auth/loginRequestValidation";
+import { getLoginData } from "../auth/getLoginData.js";
+import { contentView } from "../component/productContent.js";
+import { templateView } from "../component/productTemplate.js";
+import { AddContentManager } from "../componentManager/addContentManager.js";
+import { ViewChangeManager } from "../componentManager/viewChangeManager.js";
+
 
 export class EnterEvent {
-
   constructor() {
     this.event();
   }
-
   event() {
     window.addEventListener('keydown', async (e) => {
       if (e.key === "Enter") {
-
-        const id = document.getElementById('id');
-        const pw = document.getElementById('pw');
-        const isReqeust = requestValidation(id, pw);
-
-        if (isReqeust) {
-          const loginData = {
-            name: id.value,
-            pw: pw.value
-          }
+        const loginData = getLoginData();
+        if (loginData) {
           try {
             const response = await fetch('http://localhost:3000/adminLogin', {
               method: "POST",
@@ -30,9 +25,10 @@ export class EnterEvent {
 
             if (!response.ok) {
               throw new Error('실패');
+            } else {
+              const changeView = new ViewChangeManager('main-container');
+              changeView.changeView(templateView());
             }
-            // 성공 시 페이지 이동 등 추가 로직
-            // window.location.href = '/dashboard'; // 예: 대시보드 페이지로 이동
           } catch (error) {
             console.error('Error:', error);
           }
