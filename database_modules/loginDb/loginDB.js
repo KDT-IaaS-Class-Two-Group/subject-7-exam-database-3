@@ -4,13 +4,13 @@ const insertLoginDb = require("./insertLoginDb");
 
 const loginDb = () => {
   return new Promise((resolve, reject) => {
-    const db = new sqlite3.Database("./database/login.db", async (err) => {
+    const db = new sqlite3.Database("./database/all.db", async (err) => {
       if (err) {
-        console.error("login.db 에러 발생 : ", err);
+        console.error("all.db 에러 발생 : ", err);
         reject(err);
         return;
       }
-      console.log("login.db 데이터베이스 연결됨");
+      console.log("all.db 데이터베이스 연결됨");
 
       try {
         await createLoginDb(db, "login");
