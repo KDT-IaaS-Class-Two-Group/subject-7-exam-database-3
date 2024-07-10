@@ -1,10 +1,9 @@
 import { getLoginData } from "../auth/getLoginData.js";
 import { ViewChangeManager } from "../componentManager/viewChangeManager.js";
-import { searchUserEvent } from "./templateViewInputEvent.js";
+import { searchUserEvent } from "./searchUserRequestEvent.js";
 import { templateView } from "../component/productTemplate.js";
 
-
-const loginRequestEvent = async (e) => {
+export const loginRequestEvent = async (e) => {
   if (e.key === "Enter") {
     const loginData = getLoginData();
     if (loginData) {

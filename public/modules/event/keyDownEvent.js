@@ -1,39 +1,34 @@
-import { getLoginData } from "../auth/getLoginData.js";
-import { contentView } from "../component/productContent.js";
-import { templateView } from "../component/productTemplate.js";
-import { AddContentManager } from "../componentManager/addContentManager.js";
-import { ViewChangeManager } from "../componentManager/viewChangeManager.js";
-
-
 export class EnterEvent {
-  constructor() {
+  constructor(loginEvent, managerEvent) {
+    this.eventHandler = loginEvent;
+    this.loginEnterKeyEvent = loginEvent;
+    this.managerEnterKeyEvent = managerEvent;
     this.event();
   }
   event() {
-    window.addEventListener('keydown', async (e) => {
-      if (e.key === "Enter") {
-        const loginData = getLoginData();
-        if (loginData) {
-          try {
-            const response = await fetch('http://localhost:3000/adminLogin', {
-              method: "POST",
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(loginData)
-            });
+    window.addEventListener('hashchange', () => {
+      this.updateEvent();
+    })
+    window.addEventListener('keydown', this.eventHandler);
+  }
 
-            if (!response.ok) {
-              throw new Error('실패');
-            } else {
-              const changeView = new ViewChangeManager('main-container');
-              changeView.changeView(templateView());
-            }
-          } catch (error) {
-            console.error('Error:', error);
-          }
-        }
-      }
-    });
+  updateEvent() {
+    if (this.eventHandler) {
+      window.removeEventListener('keydown', this.eventHandler);
+    }
+    const hash = window.location.hash;
+
+    switch (hash) {
+      case "#login":
+        this.eventHandler = this.loginEnterKeyEvent;
+        break;
+      case "#manager":
+        this.eventHandler = this.managerEnterKeyEvent;
+        break;
+      default:
+        return;
+    };
+
+    window.addEventListener('keydown', this.eventHandler);
   }
 }
