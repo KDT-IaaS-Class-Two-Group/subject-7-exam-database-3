@@ -1,8 +1,8 @@
 const database = require("sqlite3").verbose();
 const path = require("path");
-const db = new database.Database(
-  path.join(__dirname, "../../database/login.db")
-);
+// const db = new database.Database(
+//   path.join(__dirname, "../../database/login.db")
+// );
 const selectLoginDb = (
   wantSelect,
   tableName,
