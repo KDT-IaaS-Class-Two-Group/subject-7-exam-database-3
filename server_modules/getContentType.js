@@ -25,9 +25,9 @@ const getContentType = (url) => {
         return "image/svg+xml";
       }
       return "image/png"; // 기본값으로 PNG
-    } else if (url.includes("css")) {
+    } else if (url.includes(".css")) {
       return "text/css";
-    } else if (url === "/index.html" || url === "/HTML/index.html") {
+    } else if (url.includes(".html")) {
       return "text/html";
     }else if(url.includes('css.map')){
       return 'application/json'
