@@ -1,7 +1,7 @@
 const createDb = (db, tableName) => {
   return new Promise((resolve, reject) => {
     db.run(
-      `CREATE TABLE ${tableName} (productName TEXT NOT NULL, description TEXT, price INTEGER)`,
+      `CREATE TABLE ${tableName} (type TEXT NOT NULL, productName TEXT NOT NULL, description TEXT, price INTEGER)`,
       (err) => {
         if (err) {
           reject("오류 : ", err);
