@@ -1,7 +1,7 @@
 const createLoginDb = (db, tableName) => {
   return new Promise((resolve, reject) => {
     db.run(
-      `CREATE TABLE ${tableName} (id TEXT NOT NULL, cookie INTEGER, state TEXT)`,
+      `CREATE TABLE ${tableName} (id TEXT PRIMARY KEY, cookie INTEGER, state TEXT)`,
       (err) => {
         if (err) {
           reject("오류 : ", err);
