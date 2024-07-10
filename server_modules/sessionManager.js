@@ -12,8 +12,7 @@ class SessionManager {
 
   processRequestAdminLogin(res) {
     res.setHeader('Set-Cookie', `sessionKey=${this.session}; HttpOnly`);
-    console.log(this.session);
-    res.writeHead(200);
+    res.writeHead(200, {"Content-Type" : "text/plain"});
     res.end('Logged in successfully');
   }
 
