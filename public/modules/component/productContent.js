@@ -1,13 +1,8 @@
-export const contentView = (productName, price, stock) => {
+export const contentView = (id, product) => {
   return `    <div class="content">
-                  <span>상품명 : ${productName}</span>
-                  <input type="text" placeholder="Enter amount">
-                  <div class="buttons">
-                    <button>+</button>
-                    <button>-</button>
-                  </div>
-                  <p>가격: ${price}</p>
-                  <p>재고: ${stock}</p>
+                  <p>구매내역  | </p>
+                  <span>사용자 : ${id}</span>
+                  <p>상품: ${product}</p>
                   <button>삭제</button>
                 </div>`;
 }
