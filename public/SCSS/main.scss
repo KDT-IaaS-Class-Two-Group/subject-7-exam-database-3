@@ -112,3 +112,52 @@ main {
     opacity: 0;
   }
 }
+
+.container {
+  width: 800px;
+  height: 400px;
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+  border: 1px solid #000;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #000;
+}
+
+.input-container input {
+  margin-right: 10px;
+}
+
+.content-container {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #000;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+}
+
+.content p {
+  margin: 0 10px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.buttons button {
+  margin: 0 5px;
+}

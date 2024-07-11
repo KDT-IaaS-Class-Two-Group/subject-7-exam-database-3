@@ -1,7 +1,7 @@
-const templateView = () => {
+export const templateView = () => {
   return `<div class="container">
               <div class="input-container">
-                <input type="text" placeholder="Enter text here">
+                <input type="text" placeholder="Enter text here" id = "search-user">
                 <button>추가</button>
                 <button>저장</button>
               </div>

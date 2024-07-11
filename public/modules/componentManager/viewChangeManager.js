@@ -1,4 +1,4 @@
-class ViewChangeManager {
+export class ViewChangeManager {
   constructor(id) {
     this.view = document.getElementById(id);
   }

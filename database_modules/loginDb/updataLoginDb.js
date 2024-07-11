@@ -1,6 +1,7 @@
 const database = require("sqlite3").verbose();
-const db = new database.Database("./database/login.db");
+
 const updateLoginDb = (tableName, change, changeValue, select, selectValue) => {
+  const db = new database.Database("./database/login.db");
   const update = db.prepare(
     `UPDATE ${tableName} SET ${change} = ? WHERE ${select} = ?`
   );

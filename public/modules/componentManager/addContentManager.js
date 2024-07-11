@@ -1,8 +1,11 @@
-class AddContentManager {
-  constructor(id) {
-    this.view = document.getElementById(id);
+export class AddContentManager {
+  constructor(className) {
+    this.view = document.getElementsByClassName(className)[0];
   }
   addContent(content) {
-    this.view.appendChild()
+    const tag = document.createElement('div');
+    tag.setAttribute('class', 'content');
+    tag.innerHTML = content
+    this.view.appendChild(tag);
   }
 }

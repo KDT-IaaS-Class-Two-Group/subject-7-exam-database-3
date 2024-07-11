@@ -12,17 +12,20 @@ const getMethodHandler = (req, res) => {
   let fileName;
   switch (true) {
     case url === "/":
-      sendFile(path.join(htmlPath, "vending.html"), contentType, res);
+      sendFile(path.join(htmlPath, "test.html"), contentType, res);
       break;
 
     case url === "/HTML/index.html":
       sendFile(path.join(htmlPath, "index.html"), contentType, res);
       break;
-
+    case url === "/manager.html":
+      sendFile(path.join(htmlPath, "manager.html"), contentType, res);
+      break;
     case url === "/vending.js":
       sendFile(path.join(jsPath, "vending.js"), contentType, res);
       break;
 
+    
     case url.includes("/CSS"):
       fileName = url.split("/CSS/")[1];
       sendFile(path.join(cssPath, fileName), contentType, res);

@@ -1,43 +1,34 @@
-import { requestValidation } from "../auth/loginRequestValidation";
-
 export class EnterEvent {
-
-  constructor() {
+  constructor(loginEvent, managerEvent) {
+    this.eventHandler = loginEvent;
+    this.loginEnterKeyEvent = loginEvent;
+    this.managerEnterKeyEvent = managerEvent;
     this.event();
   }
-
   event() {
-    window.addEventListener('keydown', async (e) => {
-      if (e.key === "Enter") {
+    window.addEventListener('hashchange', () => {
+      this.updateEvent();
+    })
+    window.addEventListener('keydown', this.eventHandler);
+  }
 
-        const id = document.getElementById('id');
-        const pw = document.getElementById('pw');
-        const isReqeust = requestValidation(id, pw);
+  updateEvent() {
+    if (this.eventHandler) {
+      window.removeEventListener('keydown', this.eventHandler);
+    }
+    const hash = window.location.hash;
 
-        if (isReqeust) {
-          const loginData = {
-            name: id.value,
-            pw: pw.value
-          }
-          try {
-            const response = await fetch('http://localhost:3000/adminLogin', {
-              method: "POST",
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(loginData)
-            });
+    switch (hash) {
+      case "#login":
+        this.eventHandler = this.loginEnterKeyEvent;
+        break;
+      case "#manager":
+        this.eventHandler = this.managerEnterKeyEvent;
+        break;
+      default:
+        return;
+    };
 
-            if (!response.ok) {
-              throw new Error('실패');
-            }
-            // 성공 시 페이지 이동 등 추가 로직
-            // window.location.href = '/dashboard'; // 예: 대시보드 페이지로 이동
-          } catch (error) {
-            console.error('Error:', error);
-          }
-        }
-      }
-    });
+    window.addEventListener('keydown', this.eventHandler);
   }
 }
