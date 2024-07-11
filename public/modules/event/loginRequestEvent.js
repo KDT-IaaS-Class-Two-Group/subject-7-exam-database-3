@@ -18,7 +18,7 @@ export const loginRequestEvent = async (e) => {
         if (!response.ok) {
           throw new Error('실패');
         } else {
-          
+
           const changeView = new ViewChangeManager('main-container');
           changeView.changeView(templateView());
           searchUserEvent();
