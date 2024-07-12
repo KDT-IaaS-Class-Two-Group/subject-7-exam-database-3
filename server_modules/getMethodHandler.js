@@ -12,7 +12,7 @@ const getMethodHandler = (req, res) => {
   let fileName;
   switch (true) {
     case url === "/":
-      sendFile(path.join(htmlPath, "test.html"), contentType, res);
+      sendFile(path.join(htmlPath, "vending.html"), contentType, res);
       break;
 
     case url === "/HTML/index.html":

@@ -221,4 +221,11 @@
     <div class="coin" draggable="true">Coin</div>
     <script src="../JS/vending.js"></script>
   </body>
+  <script>
+    document.getElementsByClassName("title")[0].addEventListener("click", () => {
+      window.location.hash = "#newHash";
+      window.location.href = "/manager.html";
+
+    });
+  </script>
 </html>
