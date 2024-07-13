@@ -1,3 +1,8 @@
+import { addEventListeners } from './module/event/eventListeners.js';
+import { setCurrentCoins } from './module/event/coinState.js';
+import { attachLampEventListeners } from './module/event/lampHandlers.js';
+import { getCurrentCoins } from './module/event/coinState.js';
+import { setDropZoneEventListeners } from './module/event/dragDropHandlers.js';
 const sun = document.querySelector(".sun");
 const can = document.querySelector(".can");
 
@@ -20,529 +25,919 @@ sun.addEventListener("click", (event) => {
     })
     .catch((error) => console.error("Error:", error));
 });
-document.addEventListener('DOMContentLoaded', function () {
-    const main = document.querySelector('main');
-    const starLimit = 20;
-    const lamps = [
-        {
-            lamp: '.radiationlamp',
-            light: '.radiationlamplight',
-            backgroundClass: 'radiation-scene',
-            backgroundImage: 'url("../../img/radiation_background.png")',
-            imgClass: 'radiation_rock',
-            imgSrc: '../../img/radiation_rock.png'
-        },
-        {
-            lamp: '.animallamp',
-            light: '.animallamplight',
-            backgroundClass: 'animal-scene',
-            additionalContent: `
-                <div class="cloud1"><img src="../img/cloud1.png" alt=""></div>
-                <div class="cloud2"><img src="../img/cloud2.png" alt=""></div>
-                <div class="grass1"></div>
-                <div class="grass2"></div>
-            `,
-            additionalScript: `
-                function getRandomSpeed(min, max) {
-                    return Math.random() * (max - min) + min;
-                }
 
-                function setCloudAnimation() {
-                    const cloud1 = document.querySelector('.cloud1 img');
-                    const cloud2 = document.querySelector('.cloud2 img');
+document.addEventListener('DOMContentLoaded', () => {
+    const productElements = document.querySelectorAll('.product');
 
-                    const cloud1Speed = getRandomSpeed(30, 60); // 30초에서 60초 사이의 무작위 속도
-                    const cloud2Speed = getRandomSpeed(30, 60); // 30초에서 60초 사이의 무작위 속도
-
-                    const cloud1Direction = Math.random() < 0.5 ? 'Left' : 'Right';
-                    const cloud2Direction = cloud1Direction === 'Left' ? 'Right' : 'Left';
-
-                    cloud1.parentElement.style.animation = \`moveCloud\${cloud1Direction} \${cloud1Speed}s linear infinite\`;
-                    cloud2.parentElement.style.animation = \`moveCloud\${cloud2Direction} \${cloud2Speed}s linear infinite\`;
-                }
-
-                window.addEventListener('load', setCloudAnimation);
-            `,
-            imgClass: 'animal_rock',
-            imgSrc: '../../img/animal_rock.png'
-        },
-        {
-            lamp: '.crimelamp',
-            light: '.crimelamplight',
-            backgroundClass: 'crime-scene',
-            additionalContent: `
-                <div class="blood-stain2"><img src="../../img/bloodstain2.png" alt=""></div>
-                <div class="blood-stain"><img src="../../img/bloodstain.png" alt=""></div>
-                <h1 class="police-tape police-tape--1">
-                    &nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE
-                </h1>
-                <h1 class="police-tape police-tape--2">POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-            `,
-            imgClass: 'crime_rock',
-            imgSrc: '../../img/crime_rock.png'
-        },
-        {
-            lamp: '.timelamp',
-            light: '.timelamplight',
-            backgroundClass: 'time-scene',
-            additionalContent: `
-                <div id="binary-container" class="binary-text press-start-2p-regular"></div>
-            `,
-            additionalScript: `
-                function generateBinaryText(rows, cols) {
-                    let binaryText = '';
-                    for (let i = 0; i < rows; i++) {
-                        for (let j = 0; j < cols; j++) {
-                            const binary = Math.random() < 0.5 ? '0' : '1';
-                            const visibilityClass = Math.random() < 0.05 ? 'hidden' : ''; // 5% 확률로 숨기기
-                            binaryText += \`<span class="\${visibilityClass}">\${binary}</span>\`;
-                        }
-                        binaryText += '<br>'; // 줄 바꿈을 위한 <br> 태그
+    productElements.forEach(product => {
+        product.addEventListener('click', () => {
+            const productId = product.dataset.id;
+            fetch(`/api/product/${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                    return binaryText;
-                }
-
-                function updateBinaryText() {
-                    const binaryContainer = document.getElementById('binary-container');
-                    if (binaryContainer) {
-                        const { innerWidth, innerHeight } = window;
-                        const rows = Math.ceil(innerHeight / 20); // 20은 패딩이 포함된 대략적인 줄 높이
-                        const cols = Math.ceil(innerWidth / 16); // 16은 패딩이 포함된 대략적인 문자 너비
-                        binaryContainer.innerHTML = generateBinaryText(rows, cols);
-                    }
-                }
-
-                window.addEventListener('resize', updateBinaryText);
-                window.addEventListener('load', updateBinaryText);
-            `,
-            additionalCSS: `
-                @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-                body {
-                    background-color: black;
-                    margin: 0;
-                    overflow: hidden;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 100vh;
-                    -webkit-user-select:none;
-                    -moz-user-select:none;
-                    -ms-user-select:none;
-                    user-select:none
-                }
-
-                .press-start-2p-regular {
-                    font-family: "Press Start 2P", system-ui;
-                    font-weight: 400;
-                    font-style: normal;
-                    color: green;
-                    white-space: pre-wrap;
-                }
-
-                .binary-text {
-                    display: flex;
-                    flex-wrap: wrap;
-                    align-content: center;
-                }
-
-                .binary-text span {
-                    padding: 2px 4px; /* padding으로 간격 조정 */
-                }
-
-                .hidden {
-                    visibility: hidden;
-                }
-
-                #binary-container {
-                    filter: blur(1px);
-                    position: absolute; /* 추가된 코드: 배경 텍스트 위치를 절대 위치로 설정 */
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: -1; /* 추가된 코드: 배경 텍스트를 뒤로 보내기 위해 z-index를 -1로 설정 */
-                }
-            `,
-            imgClass: 'time_rock',
-            imgSrc: '../../img/time_rock.png'
-        },
-        {
-            lamp: '.spacelamp',
-            light: '.spacelamplight',
-            backgroundClass: 'space-scene',
-            additionalHTML: `
-                <div class="shooting-stars"></div>
-            `,
-            additionalCSS: `
-                .shooting-stars {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                    z-index: -1; /* 배경 요소를 뒤로 보내기 위해 z-index를 -1로 설정 */
-                }
-                
-                .space-star { /* 클래스 이름 변경 */
-                    position: absolute;
-                    background-color: #fff;
-                    width: 2px;
-                    height: 2px;
-                    border-radius: 50%;
-                    animation: twinkling 2s infinite;
-                }
-                
-                @keyframes twinkling {
-                    0% { opacity: 1; }
-                    50% { opacity: 0; }
-                    100% { opacity: 1; }
-                }
-                
-                @keyframes shoot {
-                    0% {
-                        transform: translate3d(0, 0, 0) scale(0);
-                        opacity: 1;
-                    }
-                    70% {
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translate3d(100vw, -100vh, 0) scale(0.5);
-                        opacity: 0;
-                    }
-                }
-            `,
-            additionalScript: `
-                function createStars() {
-                    const numberOfStars = 200; // 생성할 별의 개수
-                    const container = document.querySelector('.shooting-stars');
-                    for (let i = 0; i < numberOfStars; i++) {
-                        const star = document.createElement('div');
-                        star.className = 'space-star'; /* 클래스 이름 변경 */
-                        star.style.left = \`\${Math.random() * 100}%\`;
-                        star.style.top = \`\${Math.random() * 100}%\`;
-                        star.style.animationDelay = \`\${Math.random() * 2}s\`; // 랜덤한 딜레이를 추가합니다.
-                        container.appendChild(star);
-                    }
-                }
-                createStars();
-                
-                document.addEventListener('DOMContentLoaded', () => {
-                    const numStars = 100;
-                    const container = document.querySelector('.shooting-stars');
-                
-                    for (let i = 0; i < numStars; i++) {
-                        const star = document.createElement('div');
-                        star.className = 'space-star';
-                        star.style.top = \`\${Math.random() * 100}vh\`;
-                        star.style.left = \`\${Math.random() * 100}vw\`;
-                        star.style.animationDelay = \`\${Math.random() * 5}s\`; // 랜덤한 딜레이를 추가합니다.
-                        star.style.animationDuration = \`\${2 + Math.random() * 3}s\`;
-                        container.appendChild(star);
-                    }
-                });
-            `,
-            imgClass: 'space_rock',
-            imgSrc: '../../img/space_rock.png'
-        }
-    ];
-
-    const initialContent = main.innerHTML;
-    const initialClassName = main.className;
-    let activeLamp = null;
-    let styleElements = [];
-
-    function resetLampImages() {
-        lamps.forEach(({ light }) => {
-            const lightElement = document.querySelector(light);
-            if (lightElement) {
-                lightElement.style.display = 'none';
-            }
-        });
-    }
-
-    function setDropZoneEventListeners() {
-        const dropZone = document.getElementById('drop-zone');
-        dropZone.addEventListener('dragover', dragOver);
-        dropZone.addEventListener('drop', drop);
-    }
-
-    setDropZoneEventListeners();
-
-    lamps.forEach(({ lamp, light, backgroundClass, additionalContent, backgroundImage, additionalScript, additionalCSS, additionalHTML, imgClass, imgSrc }) => {
-        const lampElement = document.querySelector(lamp);
-        const lightElement = document.querySelector(light);
-
-        lampElement.addEventListener('click', function () {
-            resetLampImages();
-
-            if (activeLamp === lamp) {
-                lightElement.style.display = 'none';
-                if (backgroundClass && main.classList.contains(backgroundClass)) {
-                    main.classList.remove(backgroundClass);
-                }
-                if (backgroundImage) {
-                    main.style.backgroundImage = '';
-                }
-                resetMainContent();
-                activeLamp = null;
-            } else {
-                if (activeLamp) {
-                    const activeLampData = lamps.find(({ lamp }) => lamp === activeLamp);
-                    document.querySelector(activeLampData.light).style.display = 'none';
-                    resetMainContent();
-                }
-
-                lightElement.style.display = 'block';
-
-                requestAnimationFrame(() => {
-                    if (backgroundClass) {
-                        main.classList.add(backgroundClass);
-                    }
-                    if (backgroundImage) {
-                        main.style.backgroundImage = backgroundImage;
-                    }
-
-                    if (additionalContent) {
-                        main.insertAdjacentHTML('beforeend', additionalContent);
-                    }
-                    if (additionalHTML) {
-                        main.insertAdjacentHTML('beforeend', additionalHTML);
-                    }
-                    if (additionalScript) {
-                        const scriptElement = document.createElement('script');
-                        scriptElement.innerHTML = additionalScript;
-                        document.body.appendChild(scriptElement);
-                    }
-                    if (additionalCSS) {
-                        const styleElement = document.createElement('style');
-                        styleElement.innerHTML = additionalCSS;
-                        document.head.appendChild(styleElement);
-                        styleElements.push(styleElement);
-                    }
-
-                    main.offsetHeight;
-
-                    activeLamp = lamp;
-
-                    if (backgroundClass === 'time-scene') {
-                        updateBinaryText();
-                    }
-
-                    if (imgClass && imgSrc) {
-                        const starsContainer = document.getElementById('stars-container');
-                        starsContainer.innerHTML = '';
-                        starsContainer.style.opacity = 1;
-
-                        for (let i = 0; i < starLimit; i++) {
-                            const star = document.createElement('div');
-                            star.className = 'star';
-                            const coinId = `coin-${imgClass}-${i}`;
-                            star.innerHTML = `<img draggable="true" id="${coinId}" data-message="This is coin ${i} from ${imgClass}" class="${imgClass}" src="${imgSrc}" alt="">`;
-
-                            const endY = getRandomInt(90, 80);
-                            const endX = getRandomInt(10, 90);
-                            const rotateAngle = getRandomInt(-90, 90);
-
-                            star.style.transform = `translateY(${endY}vh) translateX(${endX}vw) rotate(${rotateAngle}deg)`;
-                            star.style.transition = 'transform 5s ease-in-out';
-
-                            star.querySelector('img').addEventListener('dragstart', dragStart);
-
-                            starsContainer.appendChild(star);
-                        }
-                    }
-                    setDropZoneEventListeners();
-                });
-            }
-        });
-    });
-
-    function resetMainContent() {
-        main.className = initialClassName;
-        main.innerHTML = initialContent;
-        main.style.backgroundImage = '';
-        styleElements.forEach(styleElement => {
-            document.head.removeChild(styleElement);
-        });
-        styleElements = [];
-        lamps.forEach(({ lamp, light, backgroundClass, additionalContent, backgroundImage, additionalScript, additionalCSS, additionalHTML, imgClass, imgSrc }) => {
-            const lampElement = document.querySelector(lamp);
-            const lightElement = document.querySelector(light);
-
-            lampElement.addEventListener('click', function () {
-                resetLampImages();
-
-                if (activeLamp === lamp) {
-                    lightElement.style.display = 'none';
-                    if (backgroundClass && main.classList.contains(backgroundClass)) {
-                        main.classList.remove(backgroundClass);
-                    }
-                    if (backgroundImage) {
-                        main.style.backgroundImage = '';
-                    }
-                    resetMainContent();
-                    activeLamp = null;
-                } else {
-                    if (activeLamp) {
-                        const activeLampData = lamps.find(({ lamp }) => lamp === activeLamp);
-                        document.querySelector(activeLampData.light).style.display = 'none';
-                        resetMainContent();
-                    }
-
-                    lightElement.style.display = 'block';
-
-                    requestAnimationFrame(() => {
-                        if (backgroundClass) {
-                            main.classList.add(backgroundClass);
-                        }
-                        if (backgroundImage) {
-                            main.style.backgroundImage = backgroundImage;
-                        }
-
-                        if (additionalContent) {
-                            main.insertAdjacentHTML('beforeend', additionalContent);
-                        }
-                        if (additionalHTML) {
-                            main.insertAdjacentHTML('beforeend', additionalHTML);
-                        }
-                        if (additionalScript) {
-                            const scriptElement = document.createElement('script');
-                            scriptElement.innerHTML = additionalScript;
-                            document.body.appendChild(scriptElement);
-                        }
-                        if (additionalCSS) {
-                            const styleElement = document.createElement('style');
-                            styleElement.innerHTML = additionalCSS;
-                            document.head.appendChild(styleElement);
-                            styleElements.push(styleElement);
-                        }
-
-                        main.offsetHeight;
-
-                        activeLamp = lamp;
-
-                        if (backgroundClass === 'time-scene') {
-                            updateBinaryText();
-                        }
-
-                        if (imgClass && imgSrc) {
-                            const starsContainer = document.getElementById('stars-container');
-                            starsContainer.innerHTML = '';
-                            starsContainer.style.opacity = 1;
-
-                            for (let i = 0; i < starLimit; i++) {
-                                const star = document.createElement('div');
-                                star.className = 'star';
-                                const coinId = `coin-${imgClass}-${i}`;
-                                star.innerHTML = `<img draggable="true" id="${coinId}" data-message="This is coin ${i} from ${imgClass}" class="${imgClass}" src="${imgSrc}" alt="">`;
-
-                                const endY = getRandomInt(90, 80);
-                                const endX = getRandomInt(10, 90);
-                                const rotateAngle = getRandomInt(-90, 90);
-
-                                star.style.transform = `translateY(${endY}vh) translateX(${endX}vw) rotate(${rotateAngle}deg)`;
-                                star.style.transition = 'transform 5s ease-in-out';
-
-                                star.querySelector('img').addEventListener('dragstart', dragStart);
-
-                                starsContainer.appendChild(star);
-                            }
-                        }
-                        setDropZoneEventListeners();
-                    });
-                }
-            });
-        });
-    }
-
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            if (mutation.attributeName === 'class') {
-                lamps.forEach(({ light, backgroundClass }) => {
-                    const lightElement = document.querySelector(light);
-                    if (main.classList.contains(backgroundClass)) {
-                        lightElement.style.display = 'block';
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.product) {
+                        showAlert(data.product.productName, data.product.description);
                     } else {
-                        lightElement.style.display = 'none';
+                        showAlert('Error', 'Product not found');
                     }
+                })
+                .catch(error => {
+                    console.error('Error fetching product data:', error);
+                    showAlert('Error', 'Failed to fetch product data');
                 });
-            }
         });
     });
 
-    observer.observe(main, { attributes: true });
+    restoreDeletedProducts(); // 페이지 로드 시 삭제된 상품을 반영
+    initializeCoins(); // 페이지 로드 시 코인 초기화
+    attachLampEventListeners(lamps);
+    setDropZoneEventListeners();
+    addEventListeners(lamps);
+});
 
-    let totalCoins = 0;
-    const coinDisplay = document.getElementById('coin-display');
-
-    function dragStart(event) {
-        event.dataTransfer.setData('text/plain', event.target.id);
-        const message = event.target.getAttribute('data-message');
-        console.log('Drag started:', message);
+function showAlert(title, description) {
+    let alertBox = document.getElementById('alertBox');
+    if (!alertBox) {
+        alertBox = document.createElement('div');
+        alertBox.id = 'alertBox';
+        alertBox.style.position = 'fixed';
+        alertBox.style.top = '50%';
+        alertBox.style.left = '50%';
+        alertBox.style.transform = 'translate(-50%, -50%)';
+        alertBox.style.backgroundColor = 'white';
+        alertBox.style.padding = '20px';
+        alertBox.style.border = '1px solid black';
+        alertBox.style.zIndex = '1000';
+        document.body.appendChild(alertBox);
     }
 
-    const dropZone = document.getElementById('drop-zone');
-    dropZone.addEventListener('dragover', dragOver);
-    dropZone.addEventListener('drop', drop);
+    alertBox.innerHTML = `
+        <div class="alert-title">${title}</div>
+        <div class="alert-description">${description}</div>
+    `;
+    alertBox.style.display = 'block';
+}
 
-    function dragOver(event) {
-        event.preventDefault();
+function deleteProduct(productId) {
+    let deletedProducts = JSON.parse(localStorage.getItem('deletedProducts')) || [];
+    if (!deletedProducts.includes(productId)) {
+        deletedProducts.push(productId);
+    }
+    localStorage.setItem('deletedProducts', JSON.stringify(deletedProducts));
+    const allLabels = document.querySelectorAll(`.label[data-product-id="${productId}"]`);
+    allLabels.forEach(lbl => lbl.parentElement.remove());
+}
+
+function restoreDeletedProducts() {
+    let deletedProducts = JSON.parse(localStorage.getItem('deletedProducts')) || [];
+    deletedProducts.forEach(productId => {
+        const allLabels = document.querySelectorAll(`.label[data-product-id="${productId}"]`);
+        allLabels.forEach(lbl => lbl.parentElement.remove());
+    });
+}
+
+function updateLampCoinCount(coins, lampIndex) {
+    const coinDisplay = document.querySelector(`#coin-display-${lampIndex}`);
+    if (coinDisplay) {
+        coinDisplay.textContent = `${coins} COIN`;
+    }
+}
+
+document.querySelectorAll('.label').forEach((label, index) => {
+    label.addEventListener('click', () => {
+        const alertContainer = document.getElementById('alert-container');
+        const alertMessage = document.getElementById('alert-message');
+        alertMessage.textContent = 'Do you want to purchase this item?';
+        alertContainer.classList.remove('hidden');
+        alertContainer.classList.add('visible');
+
+        const yesButton = document.getElementById('yes-button');
+        const noButton = document.getElementById('no-button');
+
+        yesButton.onclick = () => {
+            const productId = label.getAttribute('data-product-id'); // 상품 고유 ID
+            deleteProduct(productId);
+
+            alertContainer.classList.remove('visible');
+            alertContainer.classList.add('hidden');
+
+            // 상품 구매 시 코인 차감 (예시)
+            lampCoins[index] -= parseInt(label.dataset.price, 10);
+            setCurrentCoins(lampCoins[index]);
+            updateLampCoinCount(lampCoins[index], index);
+        };
+
+        noButton.onclick = () => {
+            alertContainer.classList.remove('visible');
+            alertContainer.classList.add('hidden');
+        };
+    });
+});
+
+export const lamps = [
+    {
+        lamp: '.radiationlamp',
+        light: '.radiationlamplight',
+        backgroundClass: 'radiation-scene',
+        rowIndex: 0,
+        additionalContent: `
+        <canvas id="canvas"></canvas>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <defs>
+                <filter id="shadowed-goo">
+                    <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 18 -7" result="goo" />
+                    <feGaussianBlur in="goo" stdDeviation="3" result="shadow" />
+                    <feColorMatrix in="shadow" mode="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 -0.2" result="shadow" />
+                    <feOffset in="shadow" dx="1" dy="1" result="shadow" />
+                    <feBlend in2="shadow" in="goo" result="goo" />
+                    <feBlend in2="goo" in="SourceGraphic" result="mix" />
+                </filter>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 18 -7" result="goo" />
+                    <feBlend in2="goo" in="SourceGraphic" result="mix" />
+                </filter>
+            </defs>
+        </svg>`,
+        additionalCSS: `
+html, body{
+    margin:0;
+    padding:0;
+    background-color:hsl(195, 100%, 7%);
+}
+
+#canvas{
+    z-index:1;
+    position:absolute;
+    background-color: "black";
+    margin:0 auto;
+    display:block;
+    filter:url('#shadowed-goo');
+}`,
+        additionalScript: `
+class Application {
+    constructor() {
+        this.canvas = document.getElementById("canvas");
+        this.context = this.canvas.getContext("2d");
+        this.width = this.canvas.width = window.innerWidth;
+        this.height = this.canvas.height = window.innerHeight;
+        this.center = {
+            x: this.width / 2,
+            y: this.height / 2
+        };
+
+        this.circleContainers = [];
+
+        window.addEventListener('resize', () => this.resizeCanvas(), false);
     }
 
-    function drop(event) {
-        event.preventDefault();
-        const id = event.dataTransfer.getData('text/plain');
-        console.log('Dropped ID:', id); // 드롭된 ID를 출력하여 확인
-        const coin = document.getElementById(id);
-        if (coin) {
-            const message = coin.getAttribute('data-message');
-            console.log('Dropped:', message);
-            updateCoinCount(1);
-            sendDataToServer(id);
-        } else {
-            console.error('Coin not found for id:', id);
+    resizeCanvas() {
+        this.width = this.canvas.width = window.innerWidth;
+        this.height = this.canvas.height = window.innerHeight;
+        this.center = {
+            x: this.width / 2,
+            y: this.height / 2
+        };
+
+        this.circleContainers = [];
+        this.initializeCircleContainers();
+    }
+
+    initializeCircleContainers() {
+        for (let x = 0; x < this.width + 100; x += 100) {
+            for (let y = 0; y < this.height + 100; y += 100) {
+                let circleContainer = new CircleContainer(this.context, x, y);
+                circleContainer.initializeCircles();
+                this.circleContainers.push(circleContainer);
+            }
         }
     }
 
-    function updateCoinCount(amount) {
-        totalCoins += amount;
-        coinDisplay.textContent = `${totalCoins} COIN`;
+    update() {
+        for (let i = 0; i < this.circleContainers.length; i++) {
+            this.circleContainers[i].update();
+        }
     }
 
-    function sendDataToServer(data) {
-        console.log('Sending data to server:', data);
-        fetch('/insert-coin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ data: data })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error.message);
-            console.error(error);
-        });
+    render() {
+        this.context.clearRect(0, 0, this.width, this.height);
+        for (let i = 0; i < this.circleContainers.length; i++) {
+            this.circleContainers[i].render();
+        }
     }
 
-    const coins = document.querySelectorAll('.coin');
-    coins.forEach((coin, index) => {
-        coin.id = `coin-${index}`;
-        coin.addEventListener('dragstart', dragStart);
-    });
-
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+    loop() {
+        this.update();
+        this.render();
+        window.requestAnimationFrame(() => this.loop());
     }
-});
+}
+
+class CircleContainer {
+    constructor(context, x, y) {
+        this.context = context;
+        this.position = { x, y };
+
+        this.numberOfCircles = 19;
+        this.circles = [];
+
+        this.baseRadius = 20;
+        this.bounceRadius = 150;
+        this.singleSlice = Math.PI * 2 / this.numberOfCircles;
+    }
+
+    initializeCircles() {
+        for (let i = 0; i < this.numberOfCircles; i++) {
+            this.circles.push(new Circle(this.position.x, this.position.y + Math.random(), this.baseRadius, this.bounceRadius, i * this.singleSlice));
+        }
+    }
+
+    update() {
+        for (let i = 0; i < this.numberOfCircles; i++) {
+            this.circles[i].update(this.context);
+        }
+    }
+
+    render() {
+        for (let i = 0; i < this.numberOfCircles; i++) {
+            this.circles[i].render(this.context);
+        }
+    }
+}
+
+class Circle {
+    constructor(x, y, baseRadius, bounceRadius, angleCircle) {
+        this.basePosition = { x, y };
+        this.position = { x, y };
+        this.speed = 0.01;
+        this.baseSize = 10;
+        this.size = 10;
+        this.angle = (x + y);
+        this.baseRadius = baseRadius;
+        this.bounceRadius = bounceRadius;
+        this.angleCircle = angleCircle;
+    }
+
+    update() {
+        this.position.x = this.basePosition.x + Math.cos(this.angleCircle) * (Math.sin(this.angle + this.angleCircle) * this.bounceRadius + this.baseRadius);
+        this.position.y = this.basePosition.y + Math.sin(this.angleCircle) * (Math.sin(this.angle + this.angleCircle) * this.bounceRadius + this.baseRadius);
+        this.size = Math.cos(this.angle) * 8 + this.baseSize;
+        this.angle += this.speed;
+    }
+
+    render(context) {
+        context.fillStyle = "hsl(50, 100%, " + this.size * 3 + "%)";
+        context.beginPath();
+        context.arc(this.position.x, this.position.y, this.size, 0, Math.PI * 2);
+        context.fill();
+    }
+}
+
+const application = new Application();
+application.initializeCircleContainers();
+application.loop();
+
+window.onload = function () {
+    const application = new Application();
+    application.initializeCircleContainers();
+    application.loop();
+};`,
+        imgClass: 'radiation_rock',
+        imgSrc: '../../img/radiation_rock.png',
+        coinCount: 0
+    },
+    {
+        lamp: '.animallamp',
+        light: '.animallamplight',
+        backgroundClass: 'animal-scene',
+        rowIndex: 1,
+        additionalContent: `
+<div id="background-wrap">
+  <div class="x1">
+      <div class="cloud"></div>
+  </div>
+  <div class="x2">
+      <div class="cloud"></div>
+  </div>
+  <div class="x3">
+      <div class="cloud"></div>
+  </div>
+  <div class="x4">
+      <div class="cloud"></div>
+  </div>
+  <div class="x5">
+      <div class="cloud"></div>
+  </div>
+</div>`,
+        additionalCSS: `
+body {
+    background: lightblue;
+    color: #333;
+    font: 100% Arial, Sans Serif;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: repeating-linear-gradient(
+          180deg,
+          #c8dfff,
+          #c8dfff 10px,
+          #ffffff 10px,
+          #ffffff 25px
+      );
+}
+
+#background-wrap {
+    bottom: 0;
+    left: 0;
+    padding-top: 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
+/* KEYFRAMES */
+
+@-webkit-keyframes animateCloud {
+    0% {
+        margin-left: -1000px;
+    }
+    100% {
+        margin-left: 100%;
+    }
+}
+
+@-moz-keyframes animateCloud {
+    0% {
+        margin-left: -1000px;
+    }
+    100% {
+        margin-left: 100%;
+    }
+}
+
+@keyframes animateCloud {
+    0% {
+        margin-left: -1000px;
+    }
+    100% {
+        margin-left: 100%;
+    }
+}
+
+/* ANIMATIONS */
+
+.x1 {
+    -webkit-animation: animateCloud 35s linear infinite;
+    -moz-animation: animateCloud 35s linear infinite;
+    animation: animateCloud 35s linear infinite;
+
+    -webkit-transform: scale(0.65);
+    -moz-transform: scale(0.65);
+    transform: scale(0.65);
+}
+
+.x2 {
+    -webkit-animation: animateCloud 20s linear infinite;
+    -moz-animation: animateCloud 20s linear infinite;
+    animation: animateCloud 20s linear infinite;
+
+    -webkit-transform: scale(0.3);
+    -moz-transform: scale(0.3);
+    transform: scale(0.3);
+}
+
+.x3 {
+    -webkit-animation: animateCloud 30s linear infinite;
+    -moz-animation: animateCloud 30s linear infinite;
+    animation: animateCloud 30s linear infinite;
+
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    transform: scale(0.5);
+}
+
+.x4 {
+    -webkit-animation: animateCloud 18s linear infinite;
+    -moz-animation: animateCloud 18s linear infinite;
+    animation: animateCloud 18s linear infinite;
+
+    -webkit-transform: scale(0.4);
+    -moz-transform: scale(0.4);
+    transform: scale(0.4);
+}
+
+.x5 {
+    -webkit-animation: animateCloud 25s linear infinite;
+    -moz-animation: animateCloud 25s linear infinite;
+    animation: animateCloud 25s linear infinite;
+
+    -webkit-transform: scale(0.55);
+    -moz-transform: scale(0.55);
+    transform: scale(0.55);
+}
+
+/* OBJECTS */
+
+.cloud {
+    background: #fff;
+    background: -moz-linear-gradient(top,  #fff 5%, #f1f1f1 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(5%,#fff), color-stop(100%,#f1f1f1));
+    background: -webkit-linear-gradient(top,  #fff 5%,#f1f1f1 100%);
+    background: -o-linear-gradient(top,  #fff 5%,#f1f1f1 100%);
+    background: -ms-linear-gradient(top,  #fff 5%,#f1f1f1 100%);
+    background: linear-gradient(top,  #fff 5%,#f1f1f1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#f1f1f1',GradientType=0 );
+
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+
+    -webkit-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+
+    height: 120px;
+    position: relative;
+    width: 350px;
+}
+
+.cloud:after, .cloud:before {
+    background: #fff;
+    content: '';
+    position: absolute;
+    z-indeX: -1;
+}
+
+.cloud:after {
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+
+    height: 100px;
+    left: 50px;
+    top: -50px;
+    width: 100px;
+}
+
+.cloud:before {
+    -webkit-border-radius: 200px;
+    -moz-border-radius: 200px;
+    border-radius: 200px;
+
+    width: 180px;
+    height: 180px;
+    right: 50px;
+    top: -90px;
+}`,
+        imgClass: 'animal_rock',
+        imgSrc: '../../img/animal_rock.png',
+        coinCount: 0
+    },
+    {
+        lamp: '.crimelamp',
+        light: '.crimelamplight',
+        backgroundClass: 'crime-scene',
+        rowIndex: 2,
+        additionalContent: `
+<div class="slide-text-wrapper">
+    <div class="slide-container">
+      <ul class="slide-wrapper">
+        <div class="slide original">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rotated-text-wrapper">
+    <div class="rotated-container">
+      <ul class="rotated-wrapper">
+        <div class="rotated-slide original">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="rotated-slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="rotated-slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="rotated-slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="rotated-slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="rotated-slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+        <div class="rotated-slide clone">
+          <li>
+            <div class="item">
+              POLICE&nbsp;LINE
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div> `,
+        additionalCSS: `
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+  }
+  
+  body {
+  background-color: rgb(110, 110, 110);
+  background-image: linear-gradient(335deg, #000000 23px, transparent 23px),
+    linear-gradient(155deg, #000000 23px, transparent 23px),
+    linear-gradient(335deg, #000000 23px, transparent 23px),
+    linear-gradient(155deg, #000000 23px, transparent 23px);
+  background-size: 58px 58px;
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  }
+
+  .slide-text-wrapper {
+    position: absolute;
+    background-color: #ffcd18;
+    text-align: center;
+    justify-content: center;
+    transform: rotate(10deg); 
+    top: 47%;
+    left: -3%;
+    .slide-container {
+      text-align: center;
+      overflow: hidden;
+      background-color: #ffcd18;
+      
+  
+      .slide-wrapper {
+        background-color: #ffcd18;
+        display: flex;
+        flex-wrap: nowrap;
+        
+      }
+      .slide {
+        background-color: #ffcd18;
+        padding: 0.5em 5em 1.5em 1em;
+        text-align: center;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        position: relative;
+
+        &.original {
+          animation: 18s linear infinite normal none running infiniteAnimation1;
+        }
+        &.clone {
+          animation: 18s linear infinite infiniteAnimation2;
+        }
+  
+        li {
+          margin: 0 1.25rem;
+          .item {
+            width: max-content;
+            height: 100%;
+            color: var(--gray-scale-900, #1a1a1a);
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.875rem;
+            padding-top: 20px;
+          }
+        }
+      }
+    }
+  }
+  /* 반대 */
+  .rotated-text-wrapper {
+    position: absolute;
+    background-color: #ffcd18;
+    text-align: center;
+    justify-content: center;
+    transform: rotate(-10deg); 
+    top: 35%;
+    left: -2%;
+  }
+  .rotated-container {
+    text-align: center;
+    overflow: hidden;
+    background-color: #ffcd18;
+  }
+  .rotated-wrapper {
+    background-color: #ffcd18;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .rotated-slide {
+    background-color: #ffcd18;
+    padding: 0.5em 5em 1.5em 1em;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    position: relative;
+  }
+  .rotated-slide.original {
+    animation: 18s linear infinite normal none running infiniteAnimation1;
+  }
+  .rotated-slide.clone {
+    animation: 18s linear infinite infiniteAnimation2;
+  }
+  li {
+    margin: 0 1.25rem;
+  }
+  .item {
+    width: max-content;
+    height: 100%;
+    color: var(--gray-scale-900, #1a1a1a);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.875rem;
+    padding-top: 20px;
+  }
+  @keyframes infiniteAnimation1 {
+    0% {
+      transform: translateX(0%);
+    }
+    50% {
+      transform: translateX(-100%);
+    }
+    50.1% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  @keyframes infiniteAnimation2 {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-200%);
+    }
+  }`,
+        additionalScript: `
+function createPoliceLine(id, repeatCount) {
+    const policeLine = '&nbsp;&nbsp;&nbsp;POLICE LINE&nbsp;&nbsp;&nbsp;';
+    document.getElementById(id).innerHTML = policeLine.repeat(repeatCount);
+}
+createPoliceLine('police-line-1', 50);
+createPoliceLine('police-line-2', 50);`,
+        imgClass: 'crime_rock',
+        imgSrc: '../../img/crime_rock.png',
+        coinCount: 0
+    },
+    {
+        lamp: '.timelamp',
+        light: '.timelamplight',
+        backgroundClass: 'time-scene',
+        rowIndex: 3,
+        additionalContent: `
+        <canvas id="c"></canvas>`,
+        additionalScript: `
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const dotCount = 3000;
+const size = 4;
+const f = 3;
+const dots = [];
+let w, h, cX, cY, mD, nX, nY, sX, sY;
+
+function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    cX = w / 2;
+    cY = h / 2;
+    mD = Math.sqrt((cX * cX) + (cY * cY));
+
+    nX = Math.sqrt((w / h * dotCount) + ((w - h) * (w - h) / ((4 * h) * (4 * h)))) - ((w - h) / (2 * h));
+    nY = dotCount / nX;
+    sX = w / (nX - 1);
+    sY = h / (nY - 1);
+
+    for (let i = 0; i < dotCount; i++) {
+        const x = sX * (i % nX);
+        const y = sY * (i / nX | 0);
+        const t = Math.random() * 3000;
+        const c = Math.random() * 360 | 0;
+        dots[i] = { x, y, oX: x, oY: y, t, c };
+    }
+}
+
+window.addEventListener('resize', resize);
+resize();
+
+function draw(time = 0) {
+    ctx.clearRect(0, 0, w, h);
+
+    for (let i = 0; i < dotCount; i++) {
+        const d = dots[i];
+        const t = (d.t + time) * 0.004;
+        const a = Math.sin(t);
+
+        const r = Math.floor(255 * Math.random());
+        const g = Math.floor(255 * Math.random());
+        const b = Math.floor(255 * Math.random());
+
+        if (Math.abs(d.x - d.oX) > f || Math.abs(d.y - d.oY) > f) {
+            ctx.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
+        } else {
+            ctx.fillStyle = 'rgba(0, 255, 1, ' + a + ')';
+        }
+
+        ctx.fillRect(d.x, d.y, size, size);
+    }
+    requestAnimationFrame(draw);
+}
+
+draw();`,
+        additionalCSS: `
+* {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    position:absolute;
+    display: block;
+    background: black;
+    box-sizing: border-box;
+    height:100%;
+}`,
+        imgClass: 'time_rock',
+        imgSrc: '../../img/time_rock.png',
+        coinCount: 0
+    },
+    {
+        lamp: '.spacelamp',
+        light: '.spacelamplight',
+        backgroundClass: 'space-scene',
+        rowIndex: 4,
+        additionalHTML: `
+        <div class="shooting-stars"></div>`,
+        additionalCSS: `
+.shooting-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.space-star {
+    position: absolute;
+    background-color: #fff;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    animation: twinkling 2s infinite;
+}
+
+@keyframes twinkling {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes shoot {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(100vw, -100vh, 0) scale(0.5);
+        opacity: 0;
+    }
+}`,
+        additionalScript: `
+function createStars() {
+    const numberOfStars = 200;
+    const container = document.querySelector('.shooting-stars');
+    for (let i = 0; i < numberOfStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'space-star';
+        star.style.left = \`\${Math.random() * 100}%\`;
+        star.style.top = \`\${Math.random() * 100}%\`;
+        star.style.animationDelay = \`\${Math.random() * 2}s\`;
+        container.appendChild(star);
+    }
+}
+createStars();
+
+document.addEventListener('DOMContentLoaded', () => {
+    const numStars = 100;
+    const container = document.querySelector('.shooting-stars');
+
+    for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'space-star';
+        star.style.top = \`\${Math.random() * 100}vh\`;
+        star.style.left = \`\${Math.random() * 100}vw\`;
+        star.style.animationDelay = \`\${Math.random() * 5}s\`;
+        star.style.animationDuration = \`\${2 + Math.random() * 3}s\`;
+        container.appendChild(star);
+    }
+});`,
+        imgClass: 'space_rock',
+        imgSrc: '../../img/space_rock.png',
+        coinCount: 0
+    }
+];
+
+function initializeCoins() {
+    const initialCoins = getCurrentCoins(); // 기존 코인 값을 로드
+    setCurrentCoins(initialCoins);
+    updateLampCoinCount(initialCoins, -1); // 전체 업데이트
+}
