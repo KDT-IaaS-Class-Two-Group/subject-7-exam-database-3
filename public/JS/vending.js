@@ -144,6 +144,7 @@ export const lamps = [
         lamp: '.radiationlamp',
         light: '.radiationlamplight',
         backgroundClass: 'radiation-scene',
+        lampName: 'radiation',
         rowIndex: 0,
         additionalContent: `
         <canvas id="canvas"></canvas>
@@ -316,6 +317,7 @@ window.onload = function () {
         lamp: '.animallamp',
         light: '.animallamplight',
         backgroundClass: 'animal-scene',
+        lampName: 'animal',
         rowIndex: 1,
         additionalContent: `
 <div id="background-wrap">
@@ -505,6 +507,7 @@ body {
         lamp: '.crimelamp',
         light: '.crimelamplight',
         backgroundClass: 'crime-scene',
+        lampName: 'crime',
         rowIndex: 2,
         additionalContent: `
 <div class="slide-text-wrapper">
@@ -778,6 +781,7 @@ createPoliceLine('police-line-2', 50);`,
         lamp: '.timelamp',
         light: '.timelamplight',
         backgroundClass: 'time-scene',
+        lampName: 'time',
         rowIndex: 3,
         additionalContent: `
         <canvas id="c"></canvas>`,
@@ -859,6 +863,7 @@ canvas {
         lamp: '.spacelamp',
         light: '.spacelamplight',
         backgroundClass: 'space-scene',
+        lampName: 'space',
         rowIndex: 4,
         additionalHTML: `
         <div class="shooting-stars"></div>`,

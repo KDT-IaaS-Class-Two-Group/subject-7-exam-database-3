@@ -104,7 +104,21 @@ export function resetLampImages(lamps) {
         }
     });
 }
+function setProductClickHandlers(lampData, rowIndex) {
+    const products = document.querySelectorAll(`.products .row:nth-child(${rowIndex + 1}) .can`);
+    products.forEach((product, index) => {
+        product.addEventListener('click', () => {
+            const productId = product.getAttribute('data-product-id');
+            const lampType = lampData.lamp.replace('.', ''); // '.radiationlamp' -> 'radiationlamp'
+            const lampNames = ['animal', 'crime', 'radiation', 'time', 'space'];
+            const lampName = lampNames.find(name => lampType.includes(name));
 
+            console.log('Product clicked:', productId); // 로그 추가
+            const actualIndex = rowIndex * 5 + (index + 1); // 실제 인덱스 계산
+            showAlert(product, getCurrentCoins(), lampName, actualIndex); // lampName과 productId를 전달
+        });
+    });
+}
 export function handleLampClick(lampData, lamps, lampIndex) {
     const { lamp, light, backgroundClass, additionalContent, backgroundImage, additionalScript, additionalCSS, additionalHTML, imgClass, imgSrc, rowIndex } = lampData;
     const lightElement = document.querySelector(light);
@@ -226,11 +240,11 @@ export function handleLampClick(lampData, lamps, lampIndex) {
             console.log('coinCount:', lampData.coinCount);
             updateLampCoinCount(getCurrentCoins(), lampIndex);
 
-            const products = document.querySelectorAll(`.products .row:nth-child(${lampData.rowIndex + 1}) .can`);
-            products.forEach((product, index) => {
-                product.addEventListener('click', () => showAlert(product, getCurrentCoins(), lampIndex + 1, index + 1));
-            });
-
+            // const products = document.querySelectorAll(`.products .row:nth-child(${lampData.rowIndex + 1}) .can`);
+            // products.forEach((product, index) => {
+            //     product.addEventListener('click', () => showAlert(product, getCurrentCoins(), lampIndex + 1, index + 1));
+            // });
+            setProductClickHandlers(lampData, rowIndex);
             if (lamp === '.radiationlamp') {
                 updatePriceTagsBasedOnCoins(getCurrentCoins(), lampIndex);
             }
@@ -440,7 +454,7 @@ function showAlert(product, coinCount, lampName, productIndex) {
             deleteProduct(product.dataset.productId);
   
             // 서버로 구매 정보 전송
-            fetch('http://localhost:3500/api/purchase', {
+            fetch('http://localhost:3300/api/purchase', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'

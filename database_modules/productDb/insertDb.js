@@ -1,4 +1,6 @@
-const products = require("./productData");
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./database/all.db');
+const products = require('./productData');
 
 const insertDb = (db, tableName) => {
   return new Promise((resolve, reject) => {

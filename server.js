@@ -1,2 +1,2 @@
 const serverSet = require("./server_modules/serverSet");
-serverSet(3500);
+serverSet(3300);
