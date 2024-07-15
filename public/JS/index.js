@@ -6,8 +6,8 @@ const five = document.getElementById("five");
 const logosun = document.getElementById("logoSun");
 const buttons = [
   { id: "one", message: "I like <strong>panda</strong>" },
-  { id: "two", message: "I like <strong>cheeta</strong>" },
-  { id: "three", message: "I like <strong>marmet</strong>" },
+  { id: "two", message: "I like <strong>cheetah</strong>" },
+  { id: "three", message: "I like <strong>marmot</strong>" },
   { id: "four", message: "I like <strong>penguin</strong>" },
   { id: "five", message: "I like <strong>alpaca</strong>" },
 ];
